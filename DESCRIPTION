@@ -1,0 +1,22 @@
+Package: PipeFish
+Type: Package
+Title: pKa,outlier,pO2model,etc
+Version: 0.1
+Date: 2015-08-27
+Author: J.Arsenault
+Maintainer: Who to complain to <JArsenault@Seahorsebio.com>
+Description: pKa and other stuff
+Imports:
+	methods,
+	rio,
+	dplyr,
+	tidyr,
+	knitr,
+	readr,
+	markdown,
+	Cairo,
+	ggplot2,
+	gridExtra,
+	ggthemes
+License: none
+LazyData: TRUE
