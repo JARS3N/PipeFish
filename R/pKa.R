@@ -3,7 +3,7 @@ tickfilter.B<-function(u){c(floor(median(u))-3,floor(median(u))-2,floor(median(u
 ##################
 grab96e<-function(u){
 #u is full file name#plat is platform type
-  pH=c(rep(3.8,3),rep(5,3),rep(5.8,3),rep(6.6,3),rep(7.0,3),rep(7.4,3),rep(8.15,3),rep(9.2,3))
+  pH=c(rep(3.8,12),rep(5,12),rep(5.8,12),rep(6.6,12),rep(7.0,12),rep(7.4,12),rep(8.15,12),rep(9.2,12))
     import(u,sheet="Level") %>%
     mutate(fl=u) %>%
     filter(Tick %in% tickfilter.A(Tick)) %>%
