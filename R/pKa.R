@@ -7,7 +7,7 @@ grab96e<-function(u){
     import(u,sheet="Level") %>%
     mutate(fl=u) %>%
     filter(Tick %in% tickfilter.A(Tick)) %>%
-    select(counts=contains(X$counts),Tick,Well,fl) %>%
+    select(counts=contains("pH Corrected Em."),Tick,Well,fl) %>%
     mutate(pH=pH[as.numeric(factor(Well))]) %>%
     (function(u){merge(u,data.frame(dye=c(rep('CL',6),rep('PR',6)),Well=unique(u$Well)),by="Well")}) %>%
     group_by(Well,pH,dye,fl) %>% summarise(counts=mean(counts))
