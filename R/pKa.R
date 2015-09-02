@@ -55,7 +55,7 @@ list.files(path=Directory,pattern='xlsx',full.names = TRUE)   %>%
 lapply(mungelist[[Platform]]) %>% Reduce(f='rbind') %>%
 write.csv(file=paste0(Directory,"/","data.csv"),row.names=F)
 createRmd(pHFluor,MFBatch,Directory) %>%
-write(file=paste0(Directory,"/",pHFluor,"pKa.Rmd"))
+writeLines(con=paste0(Directory,"/",pHFluor,"pKa.Rmd"),sep="\n")
 knit(paste0(Directory,"/",pHFluor,"pKa.Rmd"))
 pandoc(paste0(Directory,"/",pHFluor,"pKa.md"),format="latex")
 knit2html(paste0(Directory,"/",pHFluor,"pKa.md"))
