@@ -66,6 +66,7 @@ pKaRmd[15]<-gsub('data.csv',paste0(Directory,"/","data.csv"),pKaRmd[15])
 pKaRmd[6]<-gsub('XBATCHX',MFBatch,pKaRmd[6])
 pKaRmd[4]<-gsub('XLOTX',pHFluor,pKaRmd[4])
 pKaRmd[43]<-gsub('pKA',paste0('pKa for ',pHFluor),pKaRmd[43])
+pKaRmd
 }
 
 
