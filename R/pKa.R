@@ -56,7 +56,7 @@ lapply(mungelist[[Platform]]) %>% Reduce(f='rbind') %>%
 write.csv(file=paste0(Directory,"/","data.csv"),row.names=F)
 createRmd(pHFluor,MFBatch,Directory) %>%
 writeLines(con=paste0(Directory,"/",pHFluor,"pKa.Rmd"),sep="\n")
-knit(paste0(Directory,"/",pHFluor,"pKa.Rmd"))
+knit(in=paste0(Directory,"/",pHFluor,"pKa.Rmd"),out=paste0(Directory,"/",pHFluor,"pKa.md"))
 pandoc(paste0(Directory,"/",pHFluor,"pKa.md"),format="latex")
 knit2html(paste0(Directory,"/",pHFluor,"pKa.md"))
 }
