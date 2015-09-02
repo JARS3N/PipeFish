@@ -51,7 +51,7 @@ grab24e<-function(u){
 mungelist<-list(grab24e,grab96e,grabXF24,grabXFp)
 ####function to run pKa
 pKa<-function(pHFluor,MFBatch,Platform,Directory){
-list.files(path=Platform,pattern='xlsx',full.names = TRUE)   %>%
+list.files(path=Directory,pattern='xlsx',full.names = TRUE)   %>%
 lapply(mungelist[[Platform]]) %>% Reduce(f='rbind') %>%
 write.csv(file=paste0("Directory","/","data.csv"),row.names=F)
 createRmd(pHFluor,MFBatch,Directory) %>%
