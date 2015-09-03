@@ -38,7 +38,7 @@ OLgrb<-function(u){
     mutate(fl=u)
 }
 
-XLSSos<-function(u){
+XLSXos<-function(u){
 XLSXfiles<-list.files(path.expand(u),full.names=T,pattern='xlsx')%>%
   grep(pattern="~",invert=T,value=T) %>% normalizePath %>% shQuote
 VB<-system.file("rmd/XLOSC.vbs", package="PipeFish")%>%
