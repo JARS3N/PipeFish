@@ -38,11 +38,11 @@ OLgrb<-function(u){
     mutate(fl=u)
 }
 ##########################################################
-XLSSos<-function(u)
+XLSSos<-function(u){
 XLSXfiles<-list.files(path.expand(u),full.names=T,pattern='xlsx')%>%
   grep(pattern="~",invert=T,value=T) %>% normalizePath %>% shQuote
 VB<-system.file("rmd/XLOSC.vbs", package="PipeFish")%>%
   normalizePath %>% shQuote
 Fin<-lapply(A,function(u){paste0("Cscript"," ",B," ",u)})
-lapply(Fin,system)
+ignore<-lapply(Fin,system)
 }
