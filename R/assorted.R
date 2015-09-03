@@ -43,6 +43,6 @@ XLSXfiles<-list.files(path.expand(u),full.names=T,pattern='xlsx')%>%
   grep(pattern="~",invert=T,value=T) %>% normalizePath %>% shQuote
 VB<-system.file("rmd/XLOSC.vbs", package="PipeFish")%>%
   normalizePath %>% shQuote
-Fin<-lapply(A,function(u){paste0("Cscript"," ",VB," ",u)})
+Fin<-lapply(XLSXfiles,function(u){paste0("Cscript"," ",VB," ",u)})
 ignore<-lapply(Fin,system)
 }
