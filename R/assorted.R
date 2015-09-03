@@ -37,7 +37,7 @@ OLgrb<-function(u){
     mutate(Instrument=import(u,sheet='Assay Configuration')[35,2]) %>%
     mutate(fl=u)
 }
-##########################################################
+
 XLSSos<-function(u){
 XLSXfiles<-list.files(path.expand(u),full.names=T,pattern='xlsx')%>%
   grep(pattern="~",invert=T,value=T) %>% normalizePath %>% shQuote
