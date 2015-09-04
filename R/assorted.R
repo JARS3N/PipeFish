@@ -39,8 +39,11 @@ OLgrb<-function(u){
 }
 
 XLSXos<-function(u){
-XLSXfiles<-u %>% normalizePath %>% shQuote
-VB<-system.file("rmd/XLOSC.vbs", package="PipeFish")%>%
-  normalizePath %>% shQuote
-system(paste0("Cscript"," ",VB," ",XLSXfiles)})
+system(paste0(
+"Cscript",
+" ",
+shQuote(normalizePath(system.file("rmd/XLOSC.vbs", package="PipeFish"))),
+" ",
+shQuote(normalizePath(u))
+))
 }
