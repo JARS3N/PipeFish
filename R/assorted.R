@@ -39,10 +39,8 @@ OLgrb<-function(u){
 }
 
 XLSXos<-function(u){
-XLSXfiles<-list.files(path.expand(u),full.names=T,pattern='xlsx')%>%
-  grep(pattern="~",invert=T,value=T) %>% normalizePath %>% shQuote
+XLSXfiles<-u %>% normalizePath %>% shQuote
 VB<-system.file("rmd/XLOSC.vbs", package="PipeFish")%>%
   normalizePath %>% shQuote
-Fin<-lapply(XLSXfiles,function(u){paste0("Cscript"," ",VB," ",u)})
-ignore<-lapply(Fin,system)
+system(paste0("Cscript"," ",VB," ",XLSXfiles)})
 }
