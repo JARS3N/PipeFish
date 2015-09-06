@@ -57,9 +57,9 @@ write.csv(file=file.path(Directory,"data.csv"),row.names=F)
 createRmd(pHFluor,MFBatch,Directory) %>%
 writeLines(con=file.path(Directory,paste0(pHFluor,"pKa.Rmd")),sep="\n")
 knit(input=file.path(Directory,paste0(pHFluor,"pKa.Rmd")),output=file.path(Directory,paste0(pHFluor,"pKa.md")))
-pandoc(paste0(Directory,"/",pHFluor,"pKa.md")),format="latex")
 knit2html(input=file.path(Directory,paste0(pHFluor,"pKa.md")),
 output=file.path(Directory,paste0(pHFluor,"pKa.html")))
+pandoc(file.path(Directory,paste0(pHFluor,"pKa.html")),format="latex")
 }
 createRmd<-function(pHFluor,MFBatch,Directory){
 pKaRmd<-readLines(system.file("rmd/pKaTemplate.Rmd", package="PipeFish"))
