@@ -53,16 +53,16 @@ mungelist<-list(grab24e,grab96e,grabXF24,grabXFp)
 pKa<-function(pHFluor,MFBatch,Platform,Directory){
 list.files(path=Directory,pattern='xlsx',full.names = TRUE)   %>%
 lapply(mungelist[[as.numeric(Platform)]]) %>% Reduce(f='rbind') %>%
-write.csv(file=paste0(Directory,"/","data.csv"),row.names=F)
+write.csv(file=file.path(Directory,"data.csv"),row.names=F)
 createRmd(pHFluor,MFBatch,Directory) %>%
-writeLines(con=paste0(Directory,"/",pHFluor,"pKa.Rmd"),sep="\n")
-knit(input=paste0(Directory,"/",pHFluor,"pKa.Rmd"),output=paste0(Directory,"/",pHFluor,"pKa.md"))
-pandoc(paste0(Directory,"/",pHFluor,"pKa.md"),format="latex")
-knit2html(paste0(Directory,"/",pHFluor,"pKa.md"))
+writeLines(con=file.path(Directory,paste0(pHFluor,"pKa.Rmd")),sep="\n")
+knit(input=file.path(Directory,paste0(pHFluor,"pKa.Rmd")),output=file.path(Directory,paste0(pHFluor,"pKa.md")))
+pandoc(file.path(Directory,paste0(pHFluor,"pKa.md")),format="latex")
+knit2html(file.path(Directory,paste0(pHFluor,"pKa.md")))
 }
 createRmd<-function(pHFluor,MFBatch,Directory){
 pKaRmd<-readLines(system.file("rmd/pKaTemplate.Rmd", package="PipeFish"))
-pKaRmd[15]<-gsub('data.csv',paste0(Directory,"/","data.csv"),pKaRmd[15])
+pKaRmd[15]<-gsub('data.csv',file.path(Directory,"data.csv"),pKaRmd[15])
 pKaRmd[6]<-gsub('XBATCHX',MFBatch,pKaRmd[6])
 pKaRmd[4]<-gsub('XLOTX',pHFluor,pKaRmd[4])
 pKaRmd[43]<-gsub('pKA',paste0('pKa for ',pHFluor),pKaRmd[43])
