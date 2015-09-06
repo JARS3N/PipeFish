@@ -59,7 +59,7 @@ writeLines(con=file.path(Directory,paste0(pHFluor,"pKa.Rmd")),sep="\n")
 knit(input=file.path(Directory,paste0(pHFluor,"pKa.Rmd")),output=file.path(Directory,paste0(pHFluor,"pKa.md")))
 knit2html(input=file.path(Directory,paste0(pHFluor,"pKa.md")),
 output=file.path(Directory,paste0(pHFluor,"pKa.html")))
-pandoc(file.path(Directory,paste0(pHFluor,"pKa.html")),format="latex")
+pandoc(file.path(Directory,paste0(pHFluor,"pKa.md")),format="latex")
 }
 createRmd<-function(pHFluor,MFBatch,Directory){
 pKaRmd<-readLines(system.file("rmd/pKaTemplate.Rmd", package="PipeFish"))
