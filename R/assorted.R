@@ -42,7 +42,7 @@ XLSXos<-function(u){
 system(paste0(
 "Cscript",
 " ",
-shQuote(normalizePath(system.file("vbs/XLOSC.vbs", package="PipeFish"))),
+shQuote(normalizePath(system.file("/vbs/XLOSC.vbs", package="PipeFish"))),
 " ",
 shQuote(normalizePath(u))
 ))
@@ -54,8 +54,8 @@ LNK<-function(){
   system(paste0(
     "Cscript",
     " ",
-    shQuote(normalizePath(system.file("vbs/PFlink.vbs", package="PipeFish"))),
+    shQuote(normalizePath(system.file("/vbs/PFlink.vbs", package="PipeFish"))),
     " ",
-    shQuote(normalizePath(system.file("gui/PipeFish.exe",package="PipeFish")))
+    shQuote(normalizePath(system.file("/gui/PipeFish.exe",package="PipeFish")))
   ))
 }
