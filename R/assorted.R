@@ -47,3 +47,6 @@ shQuote(normalizePath(system.file("rmd/XLOSC.vbs", package="PipeFish"))),
 shQuote(normalizePath(u))
 ))
 }
+
+PipeFishGUI<-function(){shell.exec(system.file(path='/gui/PipeFish.exe',package='PipeFish'))}
+
