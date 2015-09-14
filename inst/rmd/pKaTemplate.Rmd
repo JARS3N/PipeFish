@@ -18,7 +18,7 @@ pHvals <- seq(min(data$pH), max(data$pH), length.out=150)
 linedata<-lapply(models,function(u){predict(u, data.frame(pH=pHvals))[1:150]})
 ld<-split(names(linedata),names(linedata))
 titrlines<-lapply(ld,function(u){data.frame(val=linedata[[u]],dye=u,pH=pHvals)}) %>% Reduce(f='rbind')
-cols <- c("CL" = "cornflowerblue","PR" = "red"))
+cols <- c("CL" = "cornflowerblue","PR" = "red")
 
 titrPlot<-ggplot(data,aes(x=pH,y=counts))+geom_jitter(aes(fill=dye),colour=I(rgb(0,0,0,.4)),size=2,width=.1,shape=21) +geom_line(data=titrlines,aes(x=pH,y=val,colour=dye))+theme_few()+ggtitle('Titration Curve')+guides(colour = FALSE,fill=FALSE) +scale_colour_manual(values = cols)
 
