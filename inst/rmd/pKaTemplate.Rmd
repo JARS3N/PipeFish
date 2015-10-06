@@ -1,7 +1,8 @@
 ---
-output: html_document
+title: pKa analysis for XLOTX
+output: pdf_document
 ---
-pKa analysis for XLOTX
+
 ========================================================
 MF batch:  XBATCHX
 
