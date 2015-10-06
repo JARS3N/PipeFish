@@ -66,10 +66,10 @@ system(Pandoc_string)
 }
 createRmd<-function(pHFluor,MFBatch,Directory){
 pKaRmd<-readLines(system.file("rmd/pKaTemplate.Rmd", package="PipeFish"))
-pKaRmd[15]<-gsub('data.csv',file.path(Directory,"data.csv"),pKaRmd[15])
-pKaRmd[6]<-gsub('XBATCHX',MFBatch,pKaRmd[6])
-pKaRmd[4]<-gsub('XLOTX',pHFluor,pKaRmd[4])
-pKaRmd[43]<-gsub('pKA',paste0('pKa for ',pHFluor),pKaRmd[43])
+pKaRmd[16]<-gsub('data.csv',file.path(Directory,"data.csv"),pKaRmd[16])
+pKaRmd[7]<-gsub('XBATCHX',MFBatch,pKaRmd[7])
+pKaRmd[2]<-gsub('XLOTX',pHFluor,pKaRmd[2])
+pKaRmd[45]<-gsub('pKA',paste0('pKa for ',pHFluor),pKaRmd[45])
 pKaRmd
 }
 
