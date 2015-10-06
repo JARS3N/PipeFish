@@ -59,7 +59,10 @@ writeLines(con=file.path(Directory,paste0(pHFluor,"pKa.Rmd")),sep="\n")
 knit(input=file.path(Directory,paste0(pHFluor,"pKa.Rmd")),output=file.path(Directory,paste0(pHFluor,"pKa.md")))
 knit2html(input=file.path(Directory,paste0(pHFluor,"pKa.md")),
 output=file.path(Directory,paste0(pHFluor,"pKa.html")))
-rmarkdown::pandoc_convert(input=file.path(Directory,paste0(pHFluor,"pKa.md")),to="latex",from="md",output=file.path(Directory,paste0(pHFluor,"pKa.pdf")))
+in<-file.path(Directory,paste0(pHFluor,"pKa.html"))
+out<-file.path(Directory,paste0(pHFluor,"pKa.pdf"))
+Pandoc_string<-paste0("pandoc -s ",in," -o ",out)
+system(Pandoc_string)
 }
 createRmd<-function(pHFluor,MFBatch,Directory){
 pKaRmd<-readLines(system.file("rmd/pKaTemplate.Rmd", package="PipeFish"))
