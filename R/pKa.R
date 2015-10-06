@@ -60,8 +60,8 @@ knit(input=file.path(Directory,paste0(pHFluor,"pKa.Rmd")),output=file.path(Direc
 knit2html(input=file.path(Directory,paste0(pHFluor,"pKa.md")),
 output=file.path(Directory,paste0(pHFluor,"pKa.html")))
 file_in<-file.path(Directory,paste0(pHFluor,"pKa.html"))
-file_out<-file.path(Directory,paste0(pHFluor,"pKa.pdf"))
-Pandoc_string<-paste0('"','pandoc -s ',file_in,' -o ',file_out,'"')
+file_out<-gsub(".html",'.pdf',file_in)
+Pandoc_string<-paste0('pandoc -s ',file_in,' -o ',file_out)
 system(Pandoc_string)
 }
 createRmd<-function(pHFluor,MFBatch,Directory){
