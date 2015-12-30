@@ -26,16 +26,16 @@ pO2<-function(TC,atm=760){
 
 
 OLgrb<-function(u){
-  import(file=u,sheet='Level') %>%
-    select(Well,pH,O2=contains("O2 (mmHg)" )) %>%
-    mutate(pHdif=abs(pH-7.4),O2dif=abs(O2-152))  %>%
-    group_by(Well) %>%
-    summarise(mxO2=max(O2dif)) %>%
-    mutate(grade=sapply(mxO2,gradeOL)) %>%
-    mutate(Lot=import(u,sheet='Assay Configuration')[27,2]) %>%
-    mutate(sn=import(u,sheet='Assay Configuration')[26,2]) %>%
-    mutate(Instrument=import(u,sheet='Assay Configuration')[35,2]) %>%
-    mutate(fl=u)
+    import(file=u,sheet='Level') %>%
+        select(data=.,Well,pH,O2=contains("O2 (mmHg)" )) %>%
+        mutate(data=.,pHdif=abs(pH-7.4),O2dif=abs(O2-152))  %>%
+        group_by(data=.,Well) %>%
+        summarise(data=.,mxO2=max(O2dif)) %>%
+        mutate(data=.,grade=sapply(mxO2,gradeOL)) %>%
+        mutate(data=.,Lot=import(u,sheet='Assay Configuration')[27,2]) %>%
+        mutate(data=.,sn=import(u,sheet='Assay Configuration')[26,2]) %>%
+        mutate(data=.,Instrument=import(u,sheet='Assay Configuration')[35,2]) %>%
+        mutate(data=.,fl=u)
 }
 
 XLSXos<-function(u){
@@ -75,7 +75,7 @@ download.file("https://github.com/JARS3N/PipeFishEtc/archive/master.zip",
 unzip(file.path(x,"PipeFishEtc.zip"),exdir=x)
 
 list.files(file.path(x,"PipeFishEtc-master"),full.names=T) %>%
-    lapply(function(u){file.copy(from=u,to=file.path(x,"nodebob-master",'app'),overwrite=TRUE)})
+    lapply(X=.,function(u){file.copy(from=u,to=file.path(x,"nodebob-master",'app'),overwrite=TRUE)})
 setwd(file.path(x,'nodebob-master'))
  if(.Platform$OS.type=="windows"){
      shell.exec(file.path(x,'nodebob-master','build.bat'))
