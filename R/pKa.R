@@ -5,57 +5,57 @@ grab96e<-function(u){
 #u is full file name#plat is platform type
   pH=c(rep(3.8,12),rep(5,12),rep(5.8,12),rep(6.6,12),rep(7.0,12),rep(7.4,12),rep(8.15,12),rep(9.2,12))
     import(u,sheet="Level") %>%
-    mutate(fl=u) %>%
-    filter(Tick %in% tickfilter.A(Tick)) %>%
-    select(counts=contains("pH Corrected Em."),Tick,Well,fl) %>%
-    mutate(pH=pH[as.numeric(factor(Well))]) %>%
+    mutate(data=.,fl=u) %>%
+    filter(data=.,Tick %in% tickfilter.A(Tick)) %>%
+    select(data=.,counts=contains("pH Corrected Em."),Tick,Well,fl) %>%
+    mutate(data=.,pH=pH[as.numeric(factor(Well))]) %>%
     (function(u){merge(u,data.frame(dye=c(rep('CL',6),rep('PR',6)),Well=unique(u$Well)),by="Well")}) %>%
-    group_by(Well,pH,dye,fl) %>% summarise(counts=mean(counts))
+    group_by(data=.,Well,pH,dye,fl) %>% summarise(data=.,counts=mean(counts))
 }
 #####################
 grabXFp<-function(u){
   pH=c(3.8,5,5.8,6.6,7.0,7.4,8.15,9.2)
   import(u,sheet="Level") %>%
-    mutate(fl=u) %>%
-    select(counts=contains("pH Corrected Em."),Tick,Well,fl)%>%
-    filter(Tick %in% tickfilter.B(Tick)) %>%
-    mutate(Tick=as.numeric(factor(Tick))) %>%
-    mutate(dye = c("CL","PR")[Tick],pH=pH[as.numeric(factor(Well))]) %>%
-    group_by(Well,pH,dye,fl) %>% summarise(counts=mean(counts))
+    mutate(data=.,fl=u) %>%
+    select(data=.,counts=contains("pH Corrected Em."),Tick,Well,fl)%>%
+    filter(data=.,Tick %in% tickfilter.B(Tick)) %>%
+    mutate(data=.,Tick=as.numeric(factor(Tick))) %>%
+    mutate(data=.,dye = c("CL","PR")[Tick],pH=pH[as.numeric(factor(Well))]) %>%
+    group_by(data=.,Well,pH,dye,fl) %>% summarise(data=.,counts=mean(counts))
 }
 
 ################################
 grab24e<-function(u){
   pH=c(rep(3.8,3),rep(5,3),rep(5.8,3),rep(6.6,3),rep(7.0,3),rep(7.4,3),rep(8.15,3),rep(9.2,3))
   import(u,sheet="Level") %>%
-    mutate(fl=u) %>%
-    select(counts=contains("pH Corrected Em."),Tick,Well,fl)%>%
-    filter(Tick %in% tickfilter.B(Tick)) %>%
-    mutate(Tick=as.numeric(factor(Tick))) %>%
-    mutate(dye = c("CL","PR")[Tick],pH=pH[as.numeric(factor(Well))]) %>%
-    group_by(Well,pH,dye,fl) %>% summarise(counts=mean(counts))
+    mutate(data=.,fl=u) %>%
+    select(data=.,counts=contains("pH Corrected Em."),Tick,Well,fl)%>%
+    filter(data=.,Tick %in% tickfilter.B(Tick)) %>%
+    mutate(data=.,Tick=as.numeric(factor(Tick))) %>%
+    mutate(data=.,dye = c("CL","PR")[Tick],pH=pH[as.numeric(factor(Well))]) %>%
+    group_by(data=.,Well,pH,dye,fl) %>% summarise(data=.,counts=mean(counts))
 }
 ###############
  grabXF24<-function(u){
    pH=c(rep(3.8,3),rep(5,3),rep(5.8,3),rep(6.6,3),rep(7.0,3),rep(7.4,3),rep(8.15,3),rep(9.2,3))
    import(u,sheet="Levels",startRow = 12,readxl = FALSE,skipEmptyRows=FALSE) %>%
-    mutate(fl=u) %>%
-   select(counts=contains("pH.Cor..Em." ),Tick,Well,fl) %>%
-   filter(Tick %in% tickfilter.B(Tick)) %>%
-   mutate(Tick=as.numeric(factor(Tick))) %>%
-   mutate(dye = c(rep("CL",3),rep("PR",3))[Tick]) %>%
-   mutate(pH=pH[as.numeric(factor(Well))]) %>%
-   group_by(Well,pH,dye,fl) %>% summarise(counts=mean(counts))
+    mutate(data=.,fl=u) %>%
+   select(data=.,counts=contains("pH.Cor..Em." ),Tick,Well,fl) %>%
+   filter(data=.,Tick %in% tickfilter.B(Tick)) %>%
+   mutate(data=.,Tick=as.numeric(factor(Tick))) %>%
+   mutate(data=.,dye = c(rep("CL",3),rep("PR",3))[Tick]) %>%
+   mutate(data=.,pH=pH[as.numeric(factor(Well))]) %>%
+   group_by(data=.,Well,pH,dye,fl) %>% summarise(data=.,counts=mean(counts))
  }
 ##################
 mungelist<-list(grab24e,grab96e,grabXF24,grabXFp)
 ####function to run pKa
 pKa<-function(pHFluor,MFBatch,Platform,Directory){
 list.files(path=Directory,pattern='xlsx',full.names = TRUE)   %>%
-lapply(mungelist[[as.numeric(Platform)]]) %>% Reduce(f='rbind') %>%
-write.csv(file=file.path(Directory,"data.csv"),row.names=F)
+lapply(data=.,mungelist[[as.numeric(Platform)]]) %>% Reduce(x=.,f='rbind') %>%
+write.csv(x=.,file=file.path(Directory,"data.csv"),row.names=F)
 createRmd(pHFluor,MFBatch,Directory) %>%
-writeLines(con=file.path(Directory,paste0(pHFluor,"pKa.Rmd")),sep="\n")
+writeLines(text=.,con=file.path(Directory,paste0(pHFluor,"pKa.Rmd")),sep="\n")
 knit(input=file.path(Directory,paste0(pHFluor,"pKa.Rmd")),output=file.path(Directory,paste0(pHFluor,"pKa.md")))
 knit2html(input=file.path(Directory,paste0(pHFluor,"pKa.md")),
 output=file.path(Directory,paste0(pHFluor,"pKa.html")))
