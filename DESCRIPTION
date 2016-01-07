@@ -18,6 +18,7 @@ Imports:
 	Cairo,
 	ggplot2,
 	gridExtra,
-	ggthemes
+	ggthemes,
+	XML
 License: none
 LazyData: TRUE
