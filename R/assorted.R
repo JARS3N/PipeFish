@@ -30,7 +30,7 @@ OLgrb<-function(u){
         select(.,Well,pH,O2=contains("O2 (mmHg)" )) %>%
         mutate(.,pHdif=abs(pH-7.4),O2dif=abs(O2-152))  %>%
         group_by(.,Well) %>%
-        summarise(.,mxO2=max(O2dif)) %>%
+        summarise(.,mxO2=max(O2dif),mxpH=max(pH)) %>%
         mutate(.,grade=sapply(mxO2,gradeOL)) %>%
         mutate(.,Lot=import(u,sheet='Assay Configuration')[27,2]) %>%
         mutate(.,sn=import(u,sheet='Assay Configuration')[26,2]) %>%
