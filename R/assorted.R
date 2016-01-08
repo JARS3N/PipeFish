@@ -26,16 +26,35 @@ pO2<-function(TC,atm=760){
 
 
 OLgrb<-function(u){
-    import(file=u,sheet='Level') %>%
-        select(.,Well,pH,O2=contains("O2 (mmHg)" )) %>%
-        mutate(.,pHdif=abs(pH-7.4),O2dif=abs(O2-152))  %>%
+    #Import sheets from XLSX file
+    X<-list(LVL=import(file=u,sheet='Level') ,
+        AC=import(u,sheet='Assay Configuration'))
+    # O2 Outliers
+    O2 <-select(X$LVL,O2=contains("O2 (mmHg)" ),Well) %>%
+        mutate(.,O2dif=abs(O2-152))  %>%
         group_by(.,Well) %>%
-        summarise(.,mxO2=max(O2dif),mxpH=max(pH)) %>%
-        mutate(.,grade=sapply(mxO2,gradeOL)) %>%
-        mutate(.,Lot=import(u,sheet='Assay Configuration')[27,2]) %>%
-        mutate(.,sn=import(u,sheet='Assay Configuration')[26,2]) %>%
-        mutate(.,Instrument=import(u,sheet='Assay Configuration')[35,2]) %>%
-        mutate(.,fl=u)
+        filter(.,O2dif==max(O2dif)) %>% 
+        ungroup(.) %>%
+        rename(.,mxO2=O2dif) %>%
+        mutate(.,grade=sapply(mxO2,gradeOL))
+    #pH Outliers
+    pH<-select(X$LVL,Well,pH) %>%
+        mutate(.,pHdif=abs(pH-7.4))  %>%
+        group_by(.,Well) %>% 
+        filter(.,pHdif==max(pHdif)) %>% 
+        ungroup(.)
+    # Tick zero median
+
+    T0 =  select(X$LVL,O2=contains("O2 (mmHg)" ),Well,Tick) %>%
+        filter(.,Tick==min(Tick)) %>%
+            summarize(med=median(O2))
+    # Final merged output
+        merge(O2,pH,by='Well') %>%
+        mutate(.,Lot=X$AC[27,2]) %>%
+        mutate(.,sn=X$AC[26,2]) %>%
+        mutate(.,Instrument=X$AC[35,2])%>%  
+        mutate(.,fl=u)  %>%
+        mutate(., MedianFirstTick = T0med$med )
 }
 
 XLSXos<-function(u){
