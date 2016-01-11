@@ -54,7 +54,7 @@ OLgrb<-function(u){
         mutate(.,sn=X$AC[26,2]) %>%
         mutate(.,Instrument=X$AC[35,2])%>%  
         mutate(.,fl=u)  %>%
-        mutate(., MedianFirstTick = T0med$med )
+        mutate(., MedianFirstTick = T0$med )
 }
 
 XLSXos<-function(u){
