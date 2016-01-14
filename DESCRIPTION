@@ -19,6 +19,7 @@ Imports:
 	ggplot2,
 	gridExtra,
 	ggthemes,
-	XML
+	XML,
+	shiny
 License: none
 LazyData: TRUE
