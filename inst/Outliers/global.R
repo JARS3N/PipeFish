@@ -7,7 +7,7 @@ getOLdata<-function(u){
         rbind_all
 }
 
-plotCTG<-function(df,nameexp){
+plotOLCTG<-function(df,nameexp){
     require(ggplot2);require(ggthemes);require(dplyr)
     nRuns<-(length(unique(df$fl)))
     df %>% mutate(ctg=paste0(Lot,"_",sn)) %>%
@@ -20,7 +20,7 @@ plotCTG<-function(df,nameexp){
 }
 
 
-plotAVGS <-function(df,nameexp){
+plotOLAVGS <-function(df,nameexp){
     require(ggplot2);require(ggthemes);require(dplyr)
     nWells<-length(unique(df$Well))
     nRuns<-(length(unique(df$fl)))

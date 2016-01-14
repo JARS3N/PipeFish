@@ -1,61 +1,11 @@
 
 
 checkforpackage<-function(A){y<-installed.packages()[,1];chk<-(A %in% y);if (chk==FALSE){install.packages(A,repos='http://cran.us.r-project.org',dependencies=TRUE) }}
-gradeOL<-function(u){c("A","B","C","D")[c(u < 5,u >=5 & u <10,u >=10 & u <20,u >= 20)]}
-TC<-function(x){
-  cumdif.counts<-diff(x$counts)
-  injection<-x$Time[which(cumdif.counts==min(cumdif.counts))-1]
-  period<-injection + 30
-  start<-x$counts[x$Time==x$Time[which(abs(x$Time-injection)==min(abs(x$Time-injection)))]]
-  endP<-x$counts[x$Time==x$Time[which(abs(x$Time-period)==min(abs(x$Time-period)))]]
-  endT<-min(sapply(which(abs(x$Time-period)==min(abs(x$Time-period))):(length(x$Time)-4),function(u){mean(x$counts[u:u+4])})) #avg of 5 points
-  deltaP<-start-endP
-  deltaT<-start-endT
-  abs(period/(log(1/(1-(deltaP/deltaT)))))
-}
-
-pO2<-function(TC,atm=760){
-  HC<-function(TC){(-0.0000058333*TC^3+0.0001821*TC^2+0.072405*TC+2.5443)*10000}
-  vp<-function(TC){0.0456*TC^2-0.8559*TC+16.509}
-  DO<-function(TC,vp,ap=atm){
-    if(TC>=0 & TC<30){coef<-.678;adj<-35}else{if(TC>=30 & TC<=50){coef<-.827;adj<-49}}
-    ((ap-vp)*coef)/(adj+TC)
-  }
-  DO(TC,vp(TC),atm)*(1/1000)*(1/32)*(18/1000)*HC(TC)*atm
-}
 
 
-OLgrb<-function(u){
-    #Import sheets from XLSX file
-    X<-list(LVL=import(file=u,sheet='Level') ,
-        AC=import(u,sheet='Assay Configuration'))
-    # O2 Outliers
-    O2 <-select(X$LVL,O2=contains("O2 (mmHg)" ),Well) %>%
-        mutate(.,O2dif=abs(O2-152))  %>%
-        group_by(.,Well) %>%
-        filter(.,O2dif==max(O2dif)) %>% 
-        ungroup(.) %>%
-        rename(.,mxO2=O2dif) %>%
-        mutate(.,grade=sapply(mxO2,gradeOL))
-    #pH Outliers
-    pH<-select(X$LVL,Well,pH) %>%
-        mutate(.,pHdif=abs(pH-7.4))  %>%
-        group_by(.,Well) %>% 
-        filter(.,pHdif==max(pHdif)) %>% 
-        ungroup(.)
-    # Tick zero median
 
-    T0 =  select(X$LVL,O2=contains("O2 (mmHg)" ),Well,Tick) %>%
-        filter(.,Tick==min(Tick)) %>%
-            summarize(med=median(O2))
-    # Final merged output
-        merge(O2,pH,by='Well') %>%
-        mutate(.,Lot=X$AC[27,2]) %>%
-        mutate(.,sn=X$AC[26,2]) %>%
-        mutate(.,Instrument=X$AC[35,2])%>%  
-        mutate(.,fl=u)  %>%
-        mutate(., MedianFirstTick = T0$med )
-}
+
+
 
 XLSXos<-function(u){
 system(paste0(

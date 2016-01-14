@@ -18,8 +18,8 @@ shinyServer(function(input, output, session) {
             output$test1 <- renderTable({DF})
             write.csv(DF,file=svpth)
             require(Cairo)
-            AVGplot<-plotAVGS(DF,input$expnm)
-            CTGplot<-plotCTG(DF,input$expnm)
+            AVGplot<-plotOLAVGS(DF,input$expnm)
+            CTGplot<-plotOLCTG(DF,input$expnm)
             ggsave(plot =AVGplot,file.path(DIR,paste0(input$expnm,"AVGplot.png")),
                   type = "cairo-png",dpi=600)
             ggsave(plot =CTGplot,file.path(DIR,paste0(input$expnm,"CTGplot.png")),
