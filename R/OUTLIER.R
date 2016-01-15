@@ -16,7 +16,7 @@ OLgrb<-function(u){
       pH <- select(X$LVL, Well, pH) %>%
         mutate(., pHdif = abs(pH -  7.4)) %>%
         group_by(., Well) %>% 
-        summarise(., pHdiff = max(pHdif)) 
+        summarise(., pHdif = max(pHdif)) 
     # Tick zero median
 
     T0 =  select(X$LVL,O2=contains("O2 (mmHg)" ),Well,Tick) %>%
