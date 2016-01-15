@@ -13,11 +13,10 @@ OLgrb<-function(u){
         rename(.,mxO2=O2dif) %>%
         mutate(.,grade=sapply(mxO2,gradeOL))
     #pH Outliers
-    pH<-select(X$LVL,Well,pH) %>%
-        mutate(.,pHdif=abs(pH-7.4))  %>%
-        group_by(.,Well) %>%
-        filter(.,pHdif==max(pHdif)) %>%
-        ungroup(.)
+      pH <- select(X$LVL, Well, pH) %>%
+        mutate(., pHdif = abs(pH -  7.4)) %>%
+        group_by(., Well) %>% 
+        summarise(., pHdiff = max(pHdif)) 
     # Tick zero median
 
     T0 =  select(X$LVL,O2=contains("O2 (mmHg)" ),Well,Tick) %>%
