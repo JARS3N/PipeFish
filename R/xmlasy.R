@@ -98,3 +98,13 @@ ComboAssay<-function(X){
         mutate(.,sn=as.character(X$sn)) %>%
         mutate(.,Lot=as.character(X$Lot))
 }
+
+TickTable<-function(u){
+    Reduce('rbind',
+           lapply(1:length(u$AssayDataSet$RateSpans),function(i){
+               qfrom=as.numeric(u$AssayDataSet$RateSpans[[i]]$StartTickIndex);
+               qto=as.numeric(u$AssayDataSet$RateSpans[[i]]$EndTickIndex);
+               Measure<-i;
+               data.frame(Tick=seq(from=qfrom,to=qto,by=1),Measure=Measure)})
+    )
+}
