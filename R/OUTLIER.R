@@ -8,9 +8,7 @@ OLgrb<-function(u){
     O2 <-select(X$LVL,O2=contains("O2 (mmHg)" ),Well) %>%
         mutate(.,O2dif=abs(O2-152))  %>%
         group_by(.,Well) %>%
-        filter(.,O2dif==max(O2dif)) %>%
-        ungroup(.) %>%
-        rename(.,mxO2=O2dif) %>%
+        summarize(.,mxO2=max(O2dif)) %>%
         mutate(.,grade=sapply(mxO2,gradeOL))
     #pH Outliers
       pH <- select(X$LVL, Well, pH) %>%
