@@ -1,0 +1,1 @@
+shiny::runApp(system.file("Outliers",package="PipeFish"),launch.browser = TRUE)
