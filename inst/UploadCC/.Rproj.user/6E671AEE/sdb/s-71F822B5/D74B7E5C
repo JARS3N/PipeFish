@@ -1,0 +1,17 @@
+{
+    "contents" : "library(shiny)\nlibrary(RMySQL)\nlibrary(PipeFish)\nlibrary(dplyr)\nlibrary(XML)\nConnectInfo<-readRDS(file.path((.libPaths()),\"DataStash\",\"DBinfo.RDS\"))\n\nmy_db <- dbConnect(RMySQL::MySQL(),\n                   dbname=ConnectInfo[\"dbname\"],\n                   user=ConnectInfo[\"user\"],\n                   password=ConnectInfo[\"password\"],\n                   host=ConnectInfo[\"host\"],\n                   port=as.numeric(ConnectInfo[\"port\"]))\n\nshinyServer(function(input, output) {\n    observe({\n        if(input$goButton > 0){\n            DIR<-choose.dir();\n           DF<- DIR %>%\n                list.files(path=.,pattern='asyr',full.names=TRUE) %>%\n                lapply(.,XML::xmlTreeParse) %>%\n                lapply(.,PipeFish::Collect) %>%\n                lapply(.,PipeFish::ComboAssay) %>%\n                rbind_all(.)\n\n            dbWriteTable(my_db, name=\"xfpwetqc\", value=DF,append=TRUE,\n                         overwrite = FALSE,row.names=FALSE)\n            dbDisconnect(my_db)\n\n\n\n            }})\n})\n",
+    "created" : 1453614737091.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "3107255616",
+    "id" : "D74B7E5C",
+    "lastKnownWriteTime" : 1453676145,
+    "path" : "~/Desktop/PipeShiny/PipeFish/inst/UploadCC/server.R",
+    "project_path" : "server.R",
+    "properties" : {
+    },
+    "relative_order" : 2,
+    "source_on_save" : false,
+    "type" : "r_source"
+}

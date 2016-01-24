@@ -1,0 +1,17 @@
+{
+    "contents" : "library(shiny)\nshinyUI(fluidPage(\n  # Application title\n  titlePanel(\"Old Faithful Geyser Data\"),\n  actionButton(\"goButton\",\"RUN\"),\n  renderPrint(output$TXT)\n))\n",
+    "created" : 1453614736825.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "2924328391",
+    "id" : "BD32CD8D",
+    "lastKnownWriteTime" : 1453660803,
+    "path" : "~/Desktop/PipeShiny/PipeFish/inst/UploadCC/ui.R",
+    "project_path" : "ui.R",
+    "properties" : {
+    },
+    "relative_order" : 1,
+    "source_on_save" : false,
+    "type" : "r_source"
+}
