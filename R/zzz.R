@@ -4,3 +4,6 @@
             dir.create(file.path((.libPaths()),"Datastash"))}
     }
 }
+
+
+CacheDBinfo<-function(u){saveRDS(u,file.path((.libPaths()),"DataStash","DBinfo.RDS"))}
