@@ -7,7 +7,7 @@ checkforpackage<-function(A){y<-installed.packages()[,1];chk<-(A %in% y);if (chk
 
 
 
-XLSXos<-function(u){
+XLSXos<-function(u=getwd()){
 system(paste0(
 "Cscript",
 " ",
