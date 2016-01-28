@@ -28,8 +28,8 @@ ungroup(.)
                                 summarize(med=median(O2))
                         # Final merged output
                             merge(O2,pH,by='Well') %>%
-                                mutate(.,Lot=X$AC[which(AC[,1]=="Cartridge Serial"),2]) %>%
-                                mutate(.,sn=X$AC[which(AC[,1]=="Cartridge Lot"),2]) %>%
+                                mutate(.,sn=X$AC[which(AC[,1]=="Cartridge Serial"),2]) %>%
+                                mutate(.,Lot=X$AC[which(AC[,1]=="Cartridge Lot"),2]) %>%
                                 mutate(.,Instrument=X$AC[which(AC[,1]=="Instrument Serial"),2])%>%
                                 mutate(.,fl=u)  %>%
                                 mutate(., MedianFirstTick = T0$med )
