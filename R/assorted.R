@@ -5,7 +5,7 @@ checkforpackage<-function(A){y<-installed.packages()[,1];chk<-(A %in% y);if (chk
 
 
 
-
+#############
 
 XLSXos<-function(u=getwd()){
 system(paste0(
@@ -16,7 +16,23 @@ shQuote(normalizePath(system.file("/vbs/XLOSC.vbs", package="PipeFish"))),
 shQuote(normalizePath(u))
 ))
 }
+## assuming MassAssayExporter.exe exists,is in the correct location and added to the system path
+exportXLS<-function(path_in){
+    dir.create(file.path(path_in,"export"))
+   shell(
+       paste('MassAssayExporter.exe',
+          normalizePath(path_in),
+          normalizePath(file.path(path_in,"export")))
+          )
+}
 
+## combines exporter and open save of asyr files
+Outandsave<-function(path_in){
+    PipeFish::exportXLS(path_in);
+    PipeFish::XLSXos(file.path(path_in,"export"))
+}
+
+################
 PipeFishGUI<-function(){shell.exec(system.file(path='/gui/PipeFish.exe',package='PipeFish'))}
 
 LNK<-function(){
