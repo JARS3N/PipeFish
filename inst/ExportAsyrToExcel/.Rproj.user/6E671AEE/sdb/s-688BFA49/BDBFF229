@@ -1,0 +1,17 @@
+{
+    "contents" : "\nlibrary(shiny)\nlibrary(PipeFish)\nshinyServer(function(input,output,session) {\n\n  stuffHappens<-  observeEvent(input$EXP,\n    {fldr<-choose.dir()\n    PipeFish::Outandsave(fldr)\n    output$session <- renderText(\"Script Complete\")\n    })\n})\n",
+    "created" : 1454346988301.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "783058477",
+    "id" : "BDBFF229",
+    "lastKnownWriteTime" : 1454348561,
+    "path" : "~/Desktop/ExportAsyrToExcel/server.R",
+    "project_path" : "server.R",
+    "properties" : {
+    },
+    "relative_order" : 2,
+    "source_on_save" : false,
+    "type" : "r_source"
+}
