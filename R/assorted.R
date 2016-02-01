@@ -22,7 +22,9 @@ exportXLS<-function(path_in){
    shell(
        paste('MassAssayExporter.exe',
           normalizePath(path_in),
-          normalizePath(file.path(path_in,"export")))
+          normalizePath(file.path(path_in,"export")),
+          sep=" "
+          )
           )
 }
 
