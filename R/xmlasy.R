@@ -13,10 +13,17 @@ Collect<-function(X){
     )
 }
 
-pH_coefs<-function(X){
-    FND<-(xmlChildren(X[["doc"]][[1]][["AssayDataSet"]][["AnalyteCalibrationsByAnalyteName"]])) 
+AnalyteIndex<-function(X){
+ FND<-(xmlChildren(X[["doc"]][[1]][["AssayDataSet"]][["AnalyteCalibrationsByAnalyteName"]])) 
     positionAnalyte<-unlist(lapply(FND,function(u){xmlValue(u[["Key"]][["string"]])}))
-    Analyte <-c(1,2) ;names(Analyte)<-positionAnalyte
+    Analyte <-c(1,2) ;names(Analyte)<-positionAnalyte;
+    Analyte
+    }
+
+
+
+pH_coefs<-function(X){
+   Analyte<-AnalyteIndex(X)
     coefs<-list(
     "slope"= as.numeric(xmlValue(X[["doc"]][[1]][["AssayDataSet"]][["AnalyteCalibrationsByAnalyteName"]][ Analyte["pH"]][["Item"]][2][["Value"]][["AnalyteCalibration"]][["GainEquation"]][["C3"]])
     ),
@@ -59,11 +66,12 @@ determineAssay<-function(X){
 
 
 get_lvls<-function(u){
+Analyte<-AnalyteIndex(u)
     Q<-u[['doc']][[1]][["AssayDataSet"]][["PlateTickDataSets"]]
     Lst<-lapply(1:length(Q),function(j){
         data.frame(
-            pHlvl=as.numeric(xmlSApply(Q[[j]][["AnalyteDataSetsByAnalyteName"]][2][["Item"]][["Value"]][["AnalyteDataSet"]][["CorrectedEmissionValues"]],xmlValue)),
-            O2lvl=as.numeric(xmlSApply(Q[[j]][["AnalyteDataSetsByAnalyteName"]][1][["Item"]][["Value"]][["AnalyteDataSet"]][["CorrectedEmissionValues"]],xmlValue)),
+            pHlvl=as.numeric(xmlSApply(Q[[j]][["AnalyteDataSetsByAnalyteName"]][Analyte["pH"]][["Item"]][["Value"]][["AnalyteDataSet"]][["CorrectedEmissionValues"]],xmlValue)),
+            O2lvl=as.numeric(xmlSApply(Q[[j]][["AnalyteDataSetsByAnalyteName"]][Analyte["O2"]][["Item"]][["Value"]][["AnalyteDataSet"]][["CorrectedEmissionValues"]],xmlValue)),
             Tick=j-1,
             Well=factor(1:length(Q[[j]][["AnalyteDataSetsByAnalyteName"]][1][["Item"]][["Value"]][["AnalyteDataSet"]][["CorrectedEmissionValues"]])))
     })
