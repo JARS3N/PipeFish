@@ -13,13 +13,17 @@ Collect<-function(X){
     )
 }
 
-pH_coefs<-function(X){coefs<-list(
-    "slope"= as.numeric(xmlValue(X[["doc"]][[1]][["AssayDataSet"]][["AnalyteCalibrationsByAnalyteName"]][2][["Item"]][2][["Value"]][["AnalyteCalibration"]][["GainEquation"]][["C3"]])
-),
-    "intercept"=as.numeric(xmlValue(X[["doc"]][[1]][["AssayDataSet"]][["AnalyteCalibrationsByAnalyteName"]][2][["Item"]][2][["Value"]][["AnalyteCalibration"]][["GainEquation"]][["C4"]])
-),
-    "target"=as.numeric(xmlValue(X[["doc"]][[1]][["AssayDataSet"]][["AnalyteCalibrationsByAnalyteName"]][2][["Item"]][2][["Value"]][["AnalyteCalibration"]][["TargetEmissionValue"]])
-))
+pH_coefs<-function(X){
+    FND<-(xmlChildren(X[["doc"]][[1]][["AssayDataSet"]][["AnalyteCalibrationsByAnalyteName"]])) 
+    positionAnalyte<-unlist(lapply(FND,function(u){xmlValue(u[["Key"]][["string"]])}))
+    Analyte <-c(1,2) ;names(Analyte)<-positionAnalyte
+    coefs<-list(
+    "slope"= as.numeric(xmlValue(X[["doc"]][[1]][["AssayDataSet"]][["AnalyteCalibrationsByAnalyteName"]][ Analyte["pH"]][["Item"]][2][["Value"]][["AnalyteCalibration"]][["GainEquation"]][["C3"]])
+    ),
+    "intercept"=as.numeric(xmlValue(X[["doc"]][[1]][["AssayDataSet"]][["AnalyteCalibrationsByAnalyteName"]][Analyte["pH"]][["Item"]][2][["Value"]][["AnalyteCalibration"]][["GainEquation"]][["C4"]])
+    ),
+    "target"=as.numeric(xmlValue(X[["doc"]][[1]][["AssayDataSet"]][["AnalyteCalibrationsByAnalyteName"]][Analyte["pH"]][["Item"]][2][["Value"]][["AnalyteCalibration"]][["TargetEmissionValue"]])
+    ))
 coefs$gain<-c((coefs$slope * coefs$target)+ coefs$intercept);
 coefs
 }
