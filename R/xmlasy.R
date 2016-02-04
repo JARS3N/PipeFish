@@ -37,9 +37,12 @@ CalData<-function(u){
 
 unlisted<-function(U){
     data.frame(
-        LED= as.numeric(xmlSApply(U[["LedValues"]],xmlValue)),
-        CalEmission=as.numeric(xmlSApply(U[["CalibrationEmissionValues"]],xmlValue)),
-        Status=factor(xmlSApply(U[["LedStatusValues"]],xmlValue))) %>%
+        LED= lapply(xmlChildren(U[["LedValues"]]),function(j){as.numeric(xmlSApply(j,xmlValue))}) %>%
+            Reduce(f='c',x=.),
+        CalEmission=lapply(xmlChildren(U[["CalibrationEmissionValues"]]),function(j){as.numeric(xmlSApply(j,xmlValue))}) %>%
+            Reduce(f='c',x=.),
+        Status=lapply(xmlChildren(U[["LedStatusValues"]]),function(j){(xmlSApply(j,xmlValue))}) %>%
+            Reduce(f='c',x=.)) %>%
         setNames(paste0(xmlValue(U[["AnalyteName"]]),".",names(.))) %>%
         mutate(Well=1:length(.[,1]))
 }
