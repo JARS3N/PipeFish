@@ -18,11 +18,12 @@ shQuote(normalizePath(u))
 }
 ## assuming MassAssayExporter.exe exists,is in the correct location and added to the system path
 exportXLS<-function(path_in){
-    dir.create(file.path(path_in,"export"))
+     newpath<-file.path(path_in,"export")
+    if (dir.exists(newpath)==FALSE){dir.create(newpath)}
    shell(
        paste('MassAssayExporter.exe',
           normalizePath(path_in),
-          normalizePath(file.path(path_in,"export")),
+          normalizePath(newpath),
           sep=" "
           )
           )
