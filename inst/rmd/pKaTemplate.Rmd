@@ -30,7 +30,7 @@ max10<-function(z){max(z) - ((max(z) - min(z))/10)}
 LowLine<-function(u){b<-min10(u);which(abs(u - b) == min(abs(u - b)))}
 HighLine<-function(u){b<-max10(u);which(abs(u - b) == min(abs(u - b)))}
 #
-pH.index<-c(lapply(linedata,LowLine),lapply(X=.,linedata,HighLine))%>%Reduce(x=.,f='rbind')
+pH.index<-c(lapply(linedata,LowLine),lapply(linedata,HighLine))%>%Reduce(x=.,f='rbind')
 
 EfRange<-data.frame(vline=pHvals[pH.index],dye=factor(c('CL','PR')))
 
