@@ -7,7 +7,7 @@ output: pdf_document
 MF batch:  XBATCHX
 
 ## pKa
-```{r Munge,echo=FALSE,dev='CairoPNG',warning=FALSE,message=FALSE,results='hide'}
+```{r Munge,echo=FALSE,dev='CairoPDF',warning=FALSE,message=FALSE,results='hide'}
 library(knitr)
 library(dplyr)
 library(ggplot2)
@@ -21,7 +21,7 @@ ld<-split(names(linedata),names(linedata))
 titrlines<-lapply(ld,function(u){data.frame(val=linedata[[u]],dye=u,pH=pHvals)}) %>% Reduce(f='rbind')
 cols <- c("CL" = "cornflowerblue","PR" = "red")
 
-titrPlot<-ggplot(data,aes(x=pH,y=counts,colour=dye,fill=dye))+geom_jitter(aes(fill=dye),size=2,width=.1,shape=16,alpha=.7) +geom_line(data=titrlines,aes(x=pH,y=val,colour=dye))+theme_few()+ggtitle('Titration Curve')+guides(colour = FALSE,fill=FALSE) +scale_colour_manual(values = cols)
+titrPlot<-ggplot(data,aes(x=pH,y=counts,colour=dye,fill=dye))+geom_jitter(aes(fill=dye),size=2,shape=16,alpha=.7) +geom_line(data=titrlines,aes(x=pH,y=val,colour=dye))+theme_few()+ggtitle('Titration Curve')+guides(colour = FALSE,fill=FALSE) +scale_colour_manual(values = cols)
 
 
 ## lines for effective range
@@ -39,9 +39,9 @@ gainData<-lapply(models,function(u){predict(u, data.frame(pH=pHvals))[1:150]}) %
 lapply(function(x){data.frame(gain=diff(linedata[[x]][1:150])/diff(pHvals)/1000,pH=pHvals[-1],dye=x)}) %>% Reduce(f='rbind',x=.) %>% mutate(.data=.,dye=factor(dye))
 
 
-gain_plot<-ggplot(gainData,aes(x=pH,y=gain,colour=dye)) + geom_line(width=4) +theme_few() +ggtitle('Gain Curve') + geom_vline(data=EfRange,aes(xintercept=vline,colour=dye),linetype = 'dotted')+scale_colour_manual(values = cols)
+gain_plot<-ggplot(gainData,aes(x=pH,y=gain,colour=dye)) + geom_line(size=2) +theme_few() +ggtitle('Gain Curve') + geom_vline(data=EfRange,aes(xintercept=vline,colour=dye),linetype = 'dotted')+scale_colour_manual(values = cols)
 ```
-```{r plots,echo=FALSE,warning=FALSE,message=FALSE,fig.width=14,fig.height=6,dev='CairoPNG',fig.cap=''}
+```{r plots,echo=FALSE,warning=FALSE,message=FALSE,fig.width=14,fig.height=6,dev='CairoPDF',fig.cap=''}
 grid.arrange(titrPlot,gain_plot, nrow=1, ncol=2,top='pKA')
 ```  
 
