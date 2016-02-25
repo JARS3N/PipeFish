@@ -10,7 +10,7 @@ grab96e<-function(u){
     select(.,counts=contains("pH Corrected Em."),Tick,Well,fl) %>%
     mutate(.,pH=pH[as.numeric(factor(Well))]) %>%
     (function(u){merge(u,data.frame(dye=c(rep('CL',6),rep('PR',6)),Well=unique(u$Well)),by="Well")}) %>%
-    group_by(.,Well,pH,dye,fl) %>% summarise(data=.,counts=mean(counts))
+    group_by(.,Well,pH,dye,fl) %>% summarise(.,counts=mean(counts))
 }
 #####################
 grabXFp<-function(u){
@@ -21,7 +21,7 @@ grabXFp<-function(u){
     filter(.,Tick %in% tickfilter.B(Tick)) %>%
     mutate(.,Tick=as.numeric(factor(Tick))) %>%
     mutate(.,dye = c("CL","PR")[Tick],pH=pH[as.numeric(factor(Well))]) %>%
-    group_by(.,Well,pH,dye,fl) %>% summarise(data=.,counts=mean(counts))
+    group_by(.,Well,pH,dye,fl) %>% summarise(.,counts=mean(counts))
 }
 
 ################################
@@ -33,7 +33,7 @@ grab24e<-function(u){
     filter(.,Tick %in% tickfilter.B(Tick)) %>%
     mutate(.,Tick=as.numeric(factor(Tick))) %>%
     mutate(.,dye = c("CL","PR")[Tick],pH=pH[as.numeric(factor(Well))]) %>%
-    group_by(.,Well,pH,dye,fl) %>% summarise(data=.,counts=mean(counts))
+    group_by(.,Well,pH,dye,fl) %>% summarise(.,counts=mean(counts))
 }
 ###############
  grabXF24<-function(u){
@@ -45,7 +45,7 @@ grab24e<-function(u){
    mutate(.,Tick=as.numeric(factor(Tick))) %>%
    mutate(.,dye = c(rep("CL",3),rep("PR",3))[Tick]) %>%
    mutate(.,pH=pH[as.numeric(factor(Well))]) %>%
-   group_by(.,Well,pH,dye,fl) %>% summarise(data=.,counts=mean(counts))
+   group_by(.,Well,pH,dye,fl) %>% summarise(.,counts=mean(counts))
  }
 ##################
 mungelist<-list(grab24e,grab96e,grabXF24,grabXFp)
