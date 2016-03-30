@@ -4,14 +4,10 @@ library(PipeFish)
 
 shinyServer(function(input, output, session) {
 
-    #observe({
-    #    if(input$getdir > 0){ DIR<-choose.dir();output$session <- renderText(DIR)}
-    #})
-
     observe({
         if(input$BB > 0 ){
             DIR<-choose.dir()
-            input$expnm
+            if(input$CB==TRUE){PipeFish::Outandsave(DIR);DIR<-file.path(DIR,'export')}
             DF<-getOLdata(DIR)
             svpth<-file.path(DIR,paste0(input$expnm,".csv"))
             output$session <- renderText(svpth)
