@@ -1,6 +1,7 @@
 
 
-checkforpackage<-function(A){y<-installed.packages()[,1];chk<-(A %in% y);if (chk==FALSE){install.packages(A,repos='http://cran.us.r-project.org',dependencies=TRUE) }}
+checkforpackage<-function(A){y<-installed.packages()[,1];
+chk<-(A %in% y);if (chk==FALSE){install.packages(A,repos='http://cran.us.r-project.org',dependencies=TRUE) }}
 
 
 
@@ -36,7 +37,7 @@ Outandsave<-function(path_in){
 }
 
 ################
-PipeFishGUI<-function(){shell.exec(system.file(path='/gui/PipeFish.exe',package='PipeFish'))}
+#PipeFishGUI<-function(){shell.exec(system.file(path='/gui/PipeFish.exe',package='PipeFish'))}
 
 
 LNK_OL <-function(){
