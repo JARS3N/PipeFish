@@ -46,5 +46,5 @@ list.files(path=system.file(package="PipeFish",path='scripts'))
 
 ScriptCut <-function(LinkName,ScriptName){
   LNKcreateVBS <- system.file(package="PipeFish",path="vbs/LNKcreate.vbs")
-  shell.exec(paste("Cscript ",shQuote(LNKcreateVBS),shQuote(LinkName),shQuote("ScriptName),sep=" ")) 
+  shell.exec(paste("Cscript ",shQuote(LNKcreateVBS),shQuote(LinkName),shQuote(ScriptName),sep=" ")) 
 }
