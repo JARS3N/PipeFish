@@ -41,5 +41,5 @@ Outandsave<-function(path_in){
 
 
 LNK_OL <-function(){
-shell(system.file(package="PipeFish",path='vbs/Outliers.LNK'))
+shell(system.file(package="PipeFish",path='vbs/Outlierlnk.vbs'))
 }
