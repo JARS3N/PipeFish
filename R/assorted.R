@@ -43,3 +43,7 @@ Outandsave<-function(path_in){
 LNK_OL <-function(){
 shell(system.file(package="PipeFish",path='vbs/Outlierlnk.vbs'))
 }
+
+available_scripts<-function(){
+list.files(path=system.file(package="PipeFish",path='scripts'))
+}
