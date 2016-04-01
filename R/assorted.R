@@ -35,9 +35,11 @@ Outandsave<-function(path_in){
 #PipeFishGUI<-function(){shell.exec(system.file(path='/gui/PipeFish.exe',package='PipeFish'))}
 
 
-LNK_OL <-function(){
-shell(system.file(package="PipeFish",path='vbs/Outlierlnk.vbs'))
-}
+#LNK_OL <-function(){
+#shell(system.file(package="PipeFish",path='vbs/Outlierlnk.vbs'))
+#}
+
+LNK_OL<-function(){ScriptCut("Outlier","PipeOL.R")}
 
 available_scripts<-function(){
 list.files(path=system.file(package="PipeFish",path='scripts'))
@@ -46,5 +48,5 @@ list.files(path=system.file(package="PipeFish",path='scripts'))
 
 ScriptCut <-function(LinkName,ScriptName){
   LNKcreateVBS <- system.file(package="PipeFish",path="vbs/LNKcreate.vbs")
-  shell.exec(paste("Cscript ",shQuote(LNKcreateVBS),shQuote(LinkName),shQuote(ScriptName),sep=" ")) 
+  shell(paste("Cscript //B ",shQuote(LNKcreateVBS),shQuote(LinkName),shQuote(ScriptName),sep=" ")) 
 }
