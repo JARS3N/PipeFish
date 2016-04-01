@@ -50,3 +50,8 @@ ScriptCut <-function(LinkName,ScriptName){
   LNKcreateVBS <- system.file(package="PipeFish",path="vbs/LNKcreate.vbs")
   shell(paste("Cscript //B ",shQuote(LNKcreateVBS),shQuote(LinkName),shQuote(ScriptName),sep=" ")) 
 }
+# for adding scripts Ad-hoc
+StoreScript<-function(FROM_=file.choose()){
+TO_ <-system.file(package="PipeFish",path='scripts');
+file.copy(from=FROM_,to=TO_)
+}
