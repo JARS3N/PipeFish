@@ -18,8 +18,8 @@ exportXLS<-function(path_in){
     if (dir.exists(newpath)==FALSE){dir.create(newpath)}
    shell(
        paste('MassAssayExporter.exe',
-          normalizePath(path_in),
-          normalizePath(newpath),
+          shQuote(normalizePath(path_in)),
+          shQuote(normalizePath(newpath)),
           sep=" "
           )
           )
