@@ -3,10 +3,8 @@ title: pKa analysis for XLOTX
 output: pdf_document
 ---
 
-========================================================
-MF batch:  XBATCHX
-
-## pKa
+========================================================  
+MF batch:  XBATCHX  
 ```{r Munge,echo=FALSE,dev='CairoPDF',warning=FALSE,message=FALSE,results='hide'}
 library(knitr)
 library(dplyr)
