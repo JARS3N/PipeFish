@@ -50,7 +50,7 @@ grab24e<-function(u){
 ##################
 mungelist<-list(grab24e,grab96e,grabXF24,grabXFp)
 ####function to run pKa
-pKa<-function(pHFluor,MFBatch,Platform,Directory){
+pKaOLD<-function(pHFluor,MFBatch,Platform,Directory){
 list.files(path=Directory,pattern='xlsx',full.names = TRUE)   %>%
 lapply(.,mungelist[[as.numeric(Platform)]]) %>% 
 Reduce(x=.,f='rbind') %>%
@@ -64,6 +64,17 @@ file_in<-file.path(Directory,paste0(pHFluor,"pKa.html"))
 file_out<-gsub(".html",'.pdf',file_in)
 Pandoc_string<-paste0('pandoc -s ',file_in,' -o ',file_out)
 system(Pandoc_string)
+}
+
+pKa<-function(pHFluor,MFBatch,Platform,Directory){
+  FileOut<-file.path(Directory,paste0(pHFluor,"pKa.Rmd"))
+  list.files(path=Directory,pattern='xlsx',full.names = TRUE)   %>%
+    lapply(.,mungelist[[as.numeric(Platform)]]) %>% 
+    dplyr::rbind_all() %>%
+    write.csv(x=.,file=file.path(Directory,"data.csv"),row.names=F)
+  createRmd(pHFluor,MFBatch,Directory) %>%
+    writeLines(text=.,con=file.path(Directory,paste0(pHFluor,"pKa.Rmd")),sep="\n")
+  rmarkdown::render(input=FileOut)
 }
 createRmd<-function(pHFluor,MFBatch,Directory){
 pKaRmd<-readLines(system.file("rmd/pKaTemplate.Rmd", package="PipeFish"))
