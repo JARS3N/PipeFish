@@ -28,7 +28,7 @@ grabXFp<-function(u){
 grab24e<-function(u){
   pH=c(rep(3.8,3),rep(5,3),rep(5.8,3),rep(6.6,3),rep(7.0,3),rep(7.4,3),rep(8.15,3),rep(9.2,3))
   import(u,sheet="Level") %>%
-    mutate(data=.,fl=u) %>%
+    mutate(.,fl=u) %>%
     select(.,counts=contains("pH Corrected Em."),Tick,Well,fl)%>%
     filter(.,Tick %in% tickfilter.B(Tick)) %>%
     mutate(.,Tick=as.numeric(factor(Tick))) %>%
