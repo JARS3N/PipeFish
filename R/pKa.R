@@ -43,7 +43,7 @@ grab24e<-function(u){
    select(.,counts=contains("pH.Cor..Em." ),Tick,Well,fl) %>%
    filter(.,Tick %in% tickfilter.B(Tick)) %>%
    mutate(.,Tick=as.numeric(factor(Tick))) %>%
-   mutate(.,dye = c(rep("CL",3),rep("PR",3))[as.numeric(factor(Tick>3))]) %>%
+   mutate(.,dye = c("CL","PR")[as.numeric(factor(Tick>3))]) %>%
    mutate(.,pH=pH[as.numeric(factor(Well))]) %>%
    group_by(.,Well,pH,dye,fl) %>% summarise(.,counts=mean(counts))
  }
