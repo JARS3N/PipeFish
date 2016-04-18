@@ -26,7 +26,7 @@ exportXLS<-function(path_in){
 }
 
 ## combines exporter and open save of asyr files
-Outandsave<-function(path_in=getwd(){
+Outandsave<-function(path_in=getwd()){
     PipeFish::exportXLS(path_in);
     PipeFish::XLSXos(file.path(path_in,"export"))
 }
