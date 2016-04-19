@@ -2,8 +2,8 @@ gradeOL<-function(u){c("A","B","C","D")[c(u < 5,u >=5 & u <10,u >=10 & u <20,u >
 
 OLgrb<-function(u){
  #Import sheets from XLSX file
-X<-list(LVL=import(file=u,sheet='Level') ,
- AC=import(u,sheet='Assay Configuration'))
+X<-list(LVL=rio::import(file=u,sheet='Level') ,
+ AC=rio::import(u,sheet='Assay Configuration'))
 # O2 Outliers
  O2 <-select(X$LVL,O2=contains("O2 (mmHg)" ),Well) %>%
        mutate(.,O2dif=abs(O2-152))  %>%
