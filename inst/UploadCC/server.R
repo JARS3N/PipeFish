@@ -6,7 +6,7 @@ library(XML)
 
 shinyServer(function(input, output) {
     observe({
-        output$MSG <- renderText("Starting")
+        output$MSG <- renderText("Ready")
         if(input$goButton > 0){
             output$MSG <- renderText("Select Directory")
             DIR<-choose.dir();
@@ -18,6 +18,7 @@ shinyServer(function(input, output) {
                 lapply(.,PipeFish::ComboAssay) %>%
                 rbind_all(.) %>%
                as.data.frame(.)
+               output$DF<-shiny::renderDataTable(DF)
            output$MSG <- renderText("Communicating with Database")
            ConnectInfo<-readRDS(file.path((.libPaths()[1]),"DataStash","DBinfo.RDS"))
            my_db <- dbConnect(RMySQL::MySQL(),
