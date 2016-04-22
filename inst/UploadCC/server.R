@@ -19,7 +19,7 @@ shinyServer(function(input, output) {
                 rbind_all(.) %>%
                as.data.frame(.)
            output$MSG <- renderText("Communicating with Database")
-           ConnectInfo<-readRDS(file.path((.libPaths()),"DataStash","DBinfo.RDS"))
+           ConnectInfo<-readRDS(file.path((.libPaths()[1]),"DataStash","DBinfo.RDS"))
            my_db <- dbConnect(RMySQL::MySQL(),
                               dbname=ConnectInfo["dbname"],
                               user=ConnectInfo["user"],
