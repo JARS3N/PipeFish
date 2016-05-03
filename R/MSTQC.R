@@ -41,7 +41,7 @@
 
 
          fndLOT<-function(STRING){
-           str<-tolower(STRING)
+           str<-gsub("[ ]+"," ",tolower(STRING))
           get<- paste0(unlist(regmatches(x=str,m=gregexpr("lot [0-9]+",str))),collapse="")
           as.numeric(gsub("lot","",get))
          }
