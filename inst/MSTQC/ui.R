@@ -1,17 +1,12 @@
+
 library(shiny)
-
 shinyUI(fluidPage(
-        titlePanel("PipeFish::MSTQC"),
-        br(),
-        mainPanel(
-            textInput('expnm',"Name of Experiment", value = "MST QC Analysis", width = NULL),
-            checkboxInput("CB", label = "Export from .Asyr", value = FALSE),
-            br(),
-            actionButton("BB","Run Analysis"),
-            br(),
-            textOutput("session"),
-            tableOutput("test1")
-        )
-
-)
- )
+  # Application title
+  titlePanel("Upload MST QC DATA"),
+  checkboxInput("CB", label = "Export from .Asyr", value = FALSE),
+  checkboxInput("CB2", label = "Write data to csv", value = FALSE),
+  checkboxInput("CB3", label = "Upload data to database", value = FALSE),
+  actionButton("goButton","RUN"),
+  textOutput("MSG"),
+  dataTableOutput('DF')
+))
