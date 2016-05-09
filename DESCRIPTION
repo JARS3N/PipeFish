@@ -20,6 +20,7 @@ Imports:
 	gridExtra,
 	ggthemes,
 	XML,
-	shiny
+	shiny,
+	RMySQL
 License: none
 LazyData: TRUE
