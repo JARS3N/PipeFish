@@ -3,7 +3,7 @@
 }
 CacheDBinfo<-function(A,B,C,D,E){
   ConnectInfo<-c( 'dbname'= A, 'user'= B,'password'= C,'host'= D,'port'= E)
-  savepath<-file.path((.libPaths()[LISTlib("Datastash")],"DataStash","DBinfo.RDS")
+  savepath<-file.path(.libPaths()[LISTlib("Datastash")],"DataStash","DBinfo.RDS")
   saveRDS(ConnectInfo,savepath)
 }
 CheckforDataStash<-function(){
