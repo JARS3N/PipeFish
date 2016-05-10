@@ -1,12 +1,10 @@
 .onLoad <- function(libname = find.package("PipeFish"), pkgname = "PipeFish") {
     
 CheckforDataStash<-function(){
- Lib<- (.libPaths())
-  DS<-"DataStash"
-Exists<-all(dir.exists(file.path(Lib,DS)))
-  if(Exists==FALSE){
-    dir.create(file.path((.libPaths()[1]),DS))}
-}
+  LISTlib<-unlist(lapply(.libPaths(),function(u){all(dir.exists(file.path(u,"Datastash")))}))
+  if (!(TRUE %in% LISTlib)){
+    dir.create(file.path((.libPaths()[1]),DS)) 
+  }
 }
 
 
@@ -16,9 +14,10 @@ ConnectInfo<-c( 'dbname'= A,
                 'password'= C,
                 'host'= D,
                 'port'= E)
-
+LISTlib<-unlist(lapply(.libPaths(),function(u){all(dir.exists(file.path(u,"Datastash")))}))
 saveRDS(ConnectInfo,
-file.path((.libPaths()[1]),
+file.path((.libPaths()[LISTlib]),
 "DataStash",
 "DBinfo.RDS"))
 }
+
