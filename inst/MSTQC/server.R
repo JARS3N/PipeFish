@@ -3,7 +3,7 @@ library(shiny)
 library(RMySQL)
 library(PipeFish)
 library(dplyr)
-ConnectInfo<-readRDS(file.path((.libPaths()[1]),"DataStash","DBinfo.RDS"))
+ConnectInfo<-PipeFish::DBinfo()
 shinyServer(function(input, output) {
   observe({
     output$MSG <- renderText("Ready")
