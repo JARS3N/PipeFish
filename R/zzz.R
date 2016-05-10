@@ -9,7 +9,7 @@ CacheDBinfo<-function(A,B,C,D,E){
 CheckforDataStash<-function(){
   LISTlib<-LISTlib("Datastash")
   if (!(TRUE %in% LISTlib)){
-    dir.create(file.path((.libPaths()[1]),DS)) 
+    dir.create(file.path((.libPaths()[1]),"Datastash")) 
   }}
   
   DBinfo<-function(){
