@@ -24,11 +24,11 @@ shinyServer(function(input, output) {
         if (input$CB3==TRUE){
             
             my_db <- dbConnect(RMySQL::MySQL(),
-                               dbname=ConnectInfo["dbname"],
-                               user=ConnectInfo["user"],
-                               password=ConnectInfo["password"],
-                               host=ConnectInfo["host"],
-                               port=as.numeric(ConnectInfo["port"]))
+                               dbname=ConnectInfo[1],
+                               user=ConnectInfo[2],
+                               password=ConnectInfo[3],
+                               host=ConnectInfo[4],
+                               port=as.numeric(ConnectInfo[5]))
             dbWriteTable(my_db, name='mstqc', value=DF,append=TRUE,overwrite = FALSE,row.names=FALSE)
             dbDisconnect(my_db)
         }
