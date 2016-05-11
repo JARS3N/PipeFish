@@ -22,11 +22,11 @@ shinyServer(function(input, output) {
            output$MSG <- renderText("Communicating with Database")
            ConnectInfo<-PipeFish::DBinfo()
            my_db <- dbConnect(RMySQL::MySQL(),
-                              dbname=ConnectInfo["dbname"],
-                              user=ConnectInfo["user"],
-                              password=ConnectInfo["password"],
-                              host=ConnectInfo["host"],
-                              port=as.numeric(ConnectInfo["port"]))
+                              dbname=ConnectInfo[1],
+                              user=ConnectInfo[2],
+                              password=ConnectInfo[3],
+                              host=ConnectInfo[4],
+                              port=as.numeric(ConnectInfo[5]))
            output$MSG <- renderText("Writing to Database")
             dbWriteTable(my_db, name="xfpwetqc", value=DF,append=TRUE,overwrite = FALSE,row.names=FALSE)
             dbDisconnect(my_db)
