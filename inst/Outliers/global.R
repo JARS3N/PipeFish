@@ -1,11 +1,3 @@
-getOLdata<-function(u){
-    #u is directory
-    require(PipeFish);require(dplyr);require(rio)
-    list.files(pattern = "xlsx",full.names=T,path= u) %>%
-        grep(pattern="~",invert=T,value=T)  %>%
-        lapply(OLgrb) %>%
-        rbind_all
-}
 
 plotOLCTG<-function(df,nameexp){
     require(ggplot2);require(ggthemes);require(dplyr)
