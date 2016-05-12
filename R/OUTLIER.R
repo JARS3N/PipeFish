@@ -38,6 +38,7 @@ ungroup(.)
 OLgrbs<-function(PATH=getwd()){
 require(dplyr)
 list.files(pattern='.xlsx',path=PATH,full.names=TRUE) %>%
+grep(pattern="~",x=.,invert=T,value=T)  %>%
 lapply(.,PipeFish::OLgrb) %>%
 dplyr::rbind_all()
 }
