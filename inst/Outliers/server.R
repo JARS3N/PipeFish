@@ -8,7 +8,7 @@ shinyServer(function(input, output, session) {
         if(input$BB > 0 ){
             DIR<-choose.dir()
             if(input$CB==TRUE){PipeFish::Outandsave(DIR);DIR<-file.path(DIR,'export')}
-            DF<-getOLdata(DIR)
+            DF<-OLgrbs(DIR)
             svpth<-file.path(DIR,paste0(input$expnm,".csv"))
             output$session <- renderText(svpth)
             output$test1 <- renderTable({DF})
