@@ -22,7 +22,7 @@ shinyServer(function(input, output) {
         output$MSG <- renderText("Complete")
         if (input$CB2==TRUE){write.csv(DF,file.path(DIR,'MSToutput.csv'),row.names=FALSE)}
         if (input$CB3==TRUE){
-            
+            ConnectInfo<-DataStash::Triton()
             my_db <- dbConnect(RMySQL::MySQL(),
                                dbname=ConnectInfo[1],
                                user=ConnectInfo[2],
