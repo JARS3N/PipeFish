@@ -20,7 +20,7 @@ shinyServer(function(input, output) {
                as.data.frame(.)
                output$DF<-shiny::renderDataTable(DF)
            output$MSG <- renderText("Communicating with Database")
-           ConnectInfo<-PipeFish::DBinfo()
+           ConnectInfo<-DataStash::Triton()
            my_db <- dbConnect(RMySQL::MySQL(),
                               dbname=ConnectInfo[1],
                               user=ConnectInfo[2],
