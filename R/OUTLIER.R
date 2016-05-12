@@ -35,7 +35,7 @@ ungroup(.)
                                 mutate(., MedianFirstTick = T0$med )
                     }
 ### since I'm very lazy and seem to reproduce this piece all the time:
-OLgrbs<-function(dir,PATH=""){
+OLgrbs<-function(PATH=getwd()){
 require(dplyr)
 list.files(pattern='.xlsx',path=PATH,full.names=TRUE) %>%
 lapply(.,PipeFish::OLgrb) %>%
