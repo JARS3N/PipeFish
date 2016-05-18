@@ -131,7 +131,16 @@ Ksv<-function(X){
         ungroup(.) %>%
         group_by(.,Well,Measure) %>% summarise(.,avgO2lvl=mean(O2lvl)) %>%
         mutate(.,Measure=c("Ambient","F0")[Measure])%>%
-        spread(.,Measure,avgO2lvl) %>%
+        tidyr::spread(.,Measure,avgO2lvl) %>%
         mutate(.,KSV=((F0/Ambient)-1)/152) %>%
         merge(.,X$CAL,by='Well')
 }
+
+
+
+assay<-function(X){
+  AL<-list("Gain"=PipeFish::newGain,"Ksv"=PipeFish::Ksv)
+  AL[[X$assay]](X) %>%
+    mutate(sn=X$sn,Inst=X$Inst,Lot=X$Lot)
+}
+
