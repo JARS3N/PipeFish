@@ -11,6 +11,7 @@ shinyServer(function(input, output) {
             output$MSG <- renderText("Select Directory")
             DIR<-choose.dir();
             output$MSG <- renderText("Munging Data...")
+            if(input$PLAT ==1){
            DF<- DIR %>%
                 list.files(path=.,pattern='asyr',full.names=TRUE) %>%
                 lapply(.,XML::xmlTreeParse) %>%
@@ -18,6 +19,17 @@ shinyServer(function(input, output) {
                 lapply(.,PipeFish::ComboAssay) %>%
                 rbind_all(.) %>%
                as.data.frame(.)
+               }else{
+               DF<- DIR %>%
+                list.files(path=.,pattern='asyr',full.names=TRUE) %>%
+                lapply(.,XML::xmlTreeParse) %>%
+                lapply(.,PipeFish::Collect) %>%
+                lapply(.,PipeFish::assay) %>%
+                rbind_all(.) %>%
+               as.data.frame(.)
+               }
+               
+               
                output$DF<-shiny::renderDataTable(DF)
            output$MSG <- renderText("Communicating with Database")
            ConnectInfo<-DataStash::Triton()
@@ -28,7 +40,7 @@ shinyServer(function(input, output) {
                               host=ConnectInfo[4],
                               port=as.numeric(ConnectInfo[5]))
            output$MSG <- renderText("Writing to Database")
-            dbWriteTable(my_db, name="xfpwetqc", value=DF,append=TRUE,overwrite = FALSE,row.names=FALSE)
+            dbWriteTable(my_db, name=c("xfpwetqc","xfe24wetqc","xfe96wetqc")[input$PLAT], value=DF,append=TRUE,overwrite = FALSE,row.names=FALSE)
             dbDisconnect(my_db)
             output$MSG <- renderText("Complete")
             }})
