@@ -22,5 +22,6 @@ Imports:
 	XML,
 	shiny,
 	RMySQL
+Remotes: git::https://github.com/JARS3N/PipeFish.git
 License: none
 LazyData: TRUE
