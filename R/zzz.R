@@ -38,6 +38,6 @@ autoUpGithub<-function(pack){
  GETS<-paste0("https://raw.githubusercontent.com/",pkg,"/master/DESCRIPTION")
  ongit<- gsub("Version: ","",grep("Version: ",readLines(GETS),value=T))
  if (ongit!=LAST["Version"]){
-   devtools::install_github(pkg)
+   devtools::install_github(pkg,quite=TRUE)
  }
 }
