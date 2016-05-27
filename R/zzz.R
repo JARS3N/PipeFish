@@ -1,6 +1,6 @@
 .onLoad <- function(libname = find.package("PipeFish"), pkgname = "PipeFish") {
     CheckforDataStash();
-    autoUpGithub()
+    autoUpGithub('PipeFish')
 }
 CacheDBinfo<-function(A,B,C,D,E){
 names(A)<-NULL;names(B)<-NULL;names(C)<-NULL;names(D)<-NULL;names(E)<-NULL;
