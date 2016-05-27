@@ -42,7 +42,7 @@ Outandsave<-function(path_in=getwd()){
 LNK_OL<-function(){ScriptCut("Outlier","PipeOL.R")}
 
 available_scripts<-function(fullnames=F){
-list.files(path=system.file(package="PipeFish",path='scripts',full.names=fullnames))
+list.files(path=system.file(package="PipeFish",path='scripts'),full.names=fullnames)
 }
 
 
