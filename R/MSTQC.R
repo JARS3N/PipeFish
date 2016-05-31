@@ -50,7 +50,7 @@
 
          CleanMST <-function(y){
            require(dplyr)
-           rio::import(y,sheet="Rate") %>%
+           readxl::read_excel(y,sheet="Rate") %>%
              filter(.,Group!="Background") %>%
              select(.,-Time,-PPR,-ECAR) %>%
              mutate(.,Group=sapply(Group,tolower)) %>%
