@@ -9,7 +9,7 @@ library(rio)
 library(tidyr)
 loc<-choose.dir();setwd(loc)
 A<-list.files(pattern='xlsx') %>% (function(u){split(u,u)}) %>%
-lapply(function(u){import(u,sheet='Resume') %>%
+lapply(function(u){readxl::read_excel(u,sheet='Resume') %>%
 mutate(fl=u) %>%
 filter(Tick!="Calibration") %>%
 mutate(Well=factor(Well)) %>%
