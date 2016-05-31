@@ -9,7 +9,7 @@ grab96e<-function(u){
    dplyr::filter(.,Tick %in% tickfilter.A(Tick)) %>%
    dplyr::select(.,counts=contains("pH Corrected Em."),Tick,Well,fl) %>%
     dplyr::mutate(.,pH=pH[as.numeric(factor(Well))]) %>%
-    merge(.,data.frame(dye=c(rep('CL',6),rep('PR',6)),Well=unique(u$Well)),by="Well") %>%
+    merge(.,data.frame(dye=c(rep('CL',6),rep('PR',6)),Well=unique(.['Well'])),by="Well") %>%
     dplyr::group_by(.,Well,pH,dye,fl) %>% 
     dplyr::summarise(.,counts=mean(counts))
 }
