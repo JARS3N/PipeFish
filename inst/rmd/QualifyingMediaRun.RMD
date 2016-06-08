@@ -1,0 +1,64 @@
+---
+title: "Qualify Media Runs for Instruments"
+author: "Seahorse Bioscience"
+output: html_document
+---
+##### Date: `r as.Date(Sys.time())`
+##### Instrument:  `r A<-readxl::read_excel(%FILE%)[,1:2];A[which(A[,1]=="Instrument Serial"),2]`
+##### Filename: `r basename(%FILE%)`
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+```
+
+```{r,warning=FALSE,message=FALSE}
+library(readxl)
+library(dplyr)
+library(ggplot2)
+x<-%FILE% #FilePath
+XL.Level<-readxl::read_excel(x,sheet='Level') %>% rename(.,O2=`O2 (mmHg)`)
+XL.Rate<-readxl::read_excel(x,sheet='Rate')
+grp<-XL.Level %>% 
+  mutate(absO2=abs(152-O2)) %>%
+  mutate(abspH=abs(pH-7.4)) %>%
+  group_by(Well) %>%
+  summarize(xpH=max(abspH),xO2=max(absO2))
+```
+ 
+
+#### Outliers +/- 10 from 152 mmHg O2, spec < 3
+
+```{r}
+spec1<-grp %>% filter(xO2 >10) %>% nrow()
+```
+ n = `r spec1`,  `r c("Fail","Pass")[(spec1<3)+1]`
+
+#### Outliers +/- 20 from 152 mmHg O2, spec < 1
+
+```{r}
+spec2<-grp %>% filter(xO2 >20) %>% nrow()
+```
+   
+n = `r spec2`,  `r c("Fail","Pass")[(spec2<1)+1]`
+
+   
+#### Outliers +/- 0.1 from 7.4 pH, spec < 1
+
+```{r}
+spec3 <-grp %>% filter(.,xpH >0.1) %>% nrow(.)
+```
+n = `r spec3`, `r c("Fail","Pass")[(spec3<1)+1]`
+
+#### pH rates are 0.0 +/- 10 mpH/minute
+
+```{r}
+spec4<-XL.Rate %>% 
+  mutate(abspR=abs(ECAR)) %>%
+  group_by(Well) %>%
+  summarize(W=max(abspR)) %>%
+  filter(.,W > 10) %>%
+  nrow(.)
+```
+
+n = `r spec4`, `r c("Fail","Pass")[(spec4<1)+1]`
+
+
