@@ -4,8 +4,8 @@ author: "Seahorse Bioscience"
 output: html_document
 ---
 ##### Date: `r as.Date(Sys.time())`
-##### Instrument:  `r A<-readxl::read_excel(%FILE%)[,1:2];A[which(A[,1]=="Instrument Serial"),2]`
-##### Filename: `r basename(%FILE%)`
+##### Instrument:  `r A<-readxl::read_excel('$FILE$')[,1:2];A[which(A[,1]=="Instrument Serial"),2]`
+##### Filename: `r basename('$FILE$')`
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = FALSE)
 ```
@@ -14,7 +14,7 @@ knitr::opts_chunk$set(echo = FALSE)
 library(readxl)
 library(dplyr)
 library(ggplot2)
-x<-%FILE% #FilePath
+x<-'$FILE$' #FilePath
 XL.Level<-readxl::read_excel(x,sheet='Level') %>% rename(.,O2=`O2 (mmHg)`)
 XL.Rate<-readxl::read_excel(x,sheet='Rate')
 grp<-XL.Level %>% 
