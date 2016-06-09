@@ -23,6 +23,22 @@ grp<-XL.Level %>%
   group_by(Well) %>%
   summarize(xpH=max(abspH),xO2=max(absO2))
 ```
+
+#### Level Plots
+
+
+```{r}
+library(ggplot2)
+library(ggthemes)
+XLev<-XL.Level %>% dplyr::select(.,Tick,O2,pH,Well)
+ggplot(XLev,aes(Tick,O2,Well)) +geom_line(aes(col=Well))+theme_bw()+ggtitle("O2 Levels")
+ggplot(XLev,aes(Tick,pH,Well)) +geom_line(aes(col=Well))+theme_bw()+ggtitle("pH Levels")
+
+```
+
+
+
+
  
 
 #### Outliers +/- 10 from 152 mmHg O2, spec < 3
