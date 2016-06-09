@@ -9,7 +9,7 @@
 #  ConnectInfo<-c( 'dbname'= A, 'user'= B,'password'= C,'host'= D,'port'= E)
 #  savepath<-file.path(.libPaths()[LISTlib("DataStash")],"DataStash","DBinfo.RDS")
 #  saveRDS(ConnectInfo,savepath)
-}
+#}
 #CheckforDataStash<-function(){
 #  LISTlib<-LISTlib("DataStash")
 #  if (!(TRUE %in% LISTlib)){
