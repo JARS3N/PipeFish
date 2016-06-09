@@ -1,18 +1,20 @@
 .onLoad <- function(libname = find.package("PipeFish"), pkgname = "PipeFish") {
-    CheckforDataStash();
+    #CheckforDataStash();
     autoUpGithub('PipeFish')
 }
-CacheDBinfo<-function(A,B,C,D,E){
-names(A)<-NULL;names(B)<-NULL;names(C)<-NULL;names(D)<-NULL;names(E)<-NULL;
-  ConnectInfo<-c( 'dbname'= A, 'user'= B,'password'= C,'host'= D,'port'= E)
-  savepath<-file.path(.libPaths()[LISTlib("DataStash")],"DataStash","DBinfo.RDS")
-  saveRDS(ConnectInfo,savepath)
+# REMOVED THE NEED FOR CHECK DATASTASH BY JUST CREATING A PACKAGE FOR DATASTASH,AVOIDS ALL THE OTHER MESS
+
+#CacheDBinfo<-function(A,B,C,D,E){
+#names(A)<-NULL;names(B)<-NULL;names(C)<-NULL;names(D)<-NULL;names(E)<-NULL;
+#  ConnectInfo<-c( 'dbname'= A, 'user'= B,'password'= C,'host'= D,'port'= E)
+#  savepath<-file.path(.libPaths()[LISTlib("DataStash")],"DataStash","DBinfo.RDS")
+#  saveRDS(ConnectInfo,savepath)
 }
-CheckforDataStash<-function(){
-  LISTlib<-LISTlib("DataStash")
-  if (!(TRUE %in% LISTlib)){
-    dir.create(file.path((.libPaths()[1]),"DataStash")) 
-  }}
+#CheckforDataStash<-function(){
+#  LISTlib<-LISTlib("DataStash")
+#  if (!(TRUE %in% LISTlib)){
+#    dir.create(file.path((.libPaths()[1]),"DataStash")) 
+#  }}
   
   DBinfo<-function(){
   fp<-file.path((.libPaths()[LISTlib("DataStash")]),"DataStash","DBinfo.RDS")
