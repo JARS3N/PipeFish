@@ -27,12 +27,17 @@ ungroup(.)
                                 filter(.,Tick==min(Tick)) %>%
                                 summarize(med=median(O2))
                         # Final merged output
+                             metainfo <-data.frame(
+                            sn=X$AC[which(X$AC[,1]=="Cartridge Serial"),2],
+                            Lot=X$AC[which(X$AC[,1]=="Cartridge Lot"),2] ,
+                            Instrument=X$AC[which(X$AC[,1]=="Instrument Serial"),2],
+                            fl=u,
+                             MedianFirstTick = T0$med
+                            )
+  
                             merge(O2,pH,by='Well') %>%
-                                mutate(.,sn=X$AC[which(X$AC[,1]=="Cartridge Serial"),2]) %>%
-                                mutate(.,Lot=X$AC[which(X$AC[,1]=="Cartridge Lot"),2]) %>%
-                                mutate(.,Instrument=X$AC[which(X$AC[,1]=="Instrument Serial"),2])%>%
-                                mutate(.,fl=u)  %>%
-                                mutate(., MedianFirstTick = T0$med )
+                              mutate(.,fl=u) %>%
+                              merge(.,metainfo,by='fl')
                     }
 ### since I'm very lazy and seem to reproduce this piece all the time:
 OLgrbs<-function(PATH=getwd()){
