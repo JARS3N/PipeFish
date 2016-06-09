@@ -27,12 +27,18 @@ ungroup(.)
                                 filter(.,Tick==min(Tick)) %>%
                                 summarize(med=median(O2))
                         # Final merged output
+                        
+                        sn=unlist(X$AC[which(X$AC[,1]=="Cartridge Serial"),2])
+                        Lot=unlist(X$AC[which(X$AC[,1]=="Cartridge Lot"),2])
+                        Instrument=unlist(X$AC[which(X$AC[,1]=="Instrument Serial"),2])
+                       fl=u
+                        MedianFirstTick = T0$med
                              metainfo <-data.frame(
-                            sn=X$AC[which(X$AC[,1]=="Cartridge Serial"),2],
-                            Lot=X$AC[which(X$AC[,1]=="Cartridge Lot"),2] ,
-                            Instrument=X$AC[which(X$AC[,1]=="Instrument Serial"),2],
-                            fl=u,
-                             MedianFirstTick = T0$med
+                            sn=sn,
+                            Lot=Lot ,
+                            Instrument=Instrument,
+                            fl=fl,
+                            MedianFirstTick = MedianFirstTick
                             )
   
                             merge(O2,pH,by='Well') %>%
