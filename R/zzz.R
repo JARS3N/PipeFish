@@ -32,7 +32,7 @@ givename<-function(u,splits=": "){
   out
 }
 
-autoUpGithub2<-function(pack){
+autoUpGithub<-function(pack){
   pkg<-packageDescription(pack)$URL
   GETS<-paste0("https://raw.githubusercontent.com/",pkg,"/master/DESCRIPTION")
   ongit<- gsub("Version: ","",grep("Version: ",readLines(GETS),value=T))
