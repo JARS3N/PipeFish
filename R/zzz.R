@@ -32,14 +32,13 @@ givename<-function(u,splits=": "){
   out
 }
 
-autoUpGithub<-function(pack){
- DESCfile<- system.file(package=pack,"DESCRIPTION")
- DESC<- readLines(DESCfile)
- LAST<-unlist(lapply(DESC,givename))
- pkg<-gsub("https://github.com/","",LAST["URL"])
- GETS<-paste0("https://raw.githubusercontent.com/",pkg,"/master/DESCRIPTION")
- ongit<- gsub("Version: ","",grep("Version: ",readLines(GETS),value=T))
- if (ongit!=LAST["Version"]){
-   devtools::install_github(pkg,quite=TRUE)
- }
+autoUpGithub2<-function(pack){
+  pkg<-packageDescription(pack)$URL
+  GETS<-paste0("https://raw.githubusercontent.com/",pkg,"/master/DESCRIPTION")
+  ongit<- gsub("Version: ","",grep("Version: ",readLines(GETS),value=T))
+  if (ongit!=utils::packageVersion(pack)){
+    message(paste0("Github version differs from installed version \n update",pack))
+    devtools::install_github(gsub("https://github.com/","",pkg),quite=TRUE)
+  }else{message(paste0("Github version is identical as installed \n no update for ",pack))}
 }
+
