@@ -9,6 +9,8 @@ shinyUI(fluidPage(
             br(),
             actionButton("BB","Run Analysis"),
             br(),
+            actionButton('Quit','Quit',icon=icon('remove-sign',lib='glyphicon')),
+            br(),br(),
             textOutput("session"),
             tableOutput("test1")
         )
