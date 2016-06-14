@@ -2,7 +2,9 @@
 library(shiny)
 library(PipeFish)
 shinyServer(function(input,output,session) {
-
+   observeEvent(input$Quit, {
+    stopApp(returnValue = invisible())
+  })
   stuffHappens<-  observeEvent(input$EXP,
     {fldr<-choose.dir()
     PipeFish::Outandsave(fldr)
