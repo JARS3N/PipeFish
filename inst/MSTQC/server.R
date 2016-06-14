@@ -5,6 +5,9 @@ library(PipeFish)
 library(dplyr)
 ConnectInfo<-PipeFish::DBinfo()
 shinyServer(function(input, output) {
+ observeEvent(input$Quit, {
+    stopApp(returnValue = invisible())
+  })
   observe({
     output$MSG <- renderText("Ready")
     if(input$goButton > 0){
