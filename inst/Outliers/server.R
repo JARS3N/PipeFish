@@ -4,6 +4,11 @@ library(PipeFish)
 
 shinyServer(function(input, output, session) {
 
+ observeEvent(input$Quit, {
+    stopApp(returnValue = invisible())
+  })
+
+
     observe({
         if(input$BB > 0 ){
             DIR<-choose.dir()
