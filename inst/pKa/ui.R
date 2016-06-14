@@ -13,6 +13,7 @@ shinyUI(fluidPage(
     br(),
     actionButton("BB","Run Analysis"),
     br(),
+    actionButton("Quit", "Quit"),
     textOutput("session"),
     tableOutput("test1")
   )
