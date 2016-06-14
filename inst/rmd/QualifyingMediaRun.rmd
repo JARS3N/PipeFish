@@ -15,7 +15,7 @@ library(readxl)
 library(dplyr)
 library(ggplot2)
 x<-'FILE' #FilePath
-XL.Level<-readxl::read_excel(x,sheet='Level') %>% rename(.,O2=`O2 (mmHg)`)
+XL.Level<-readxl::read_excel(x,sheet=PipeFish::fndLVL(x)) %>% rename(.,O2=`O2 (mmHg)`)
 XL.Rate<-readxl::read_excel(x,sheet='Rate')
 grp<-XL.Level %>% 
   mutate(absO2=abs(152-O2)) %>%
