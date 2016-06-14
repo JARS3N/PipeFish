@@ -5,6 +5,10 @@ library(rio)
 library(rmarkdown)
 shinyServer(function(input, output, session) {
 
+observeEvent(input$Quit, {
+    stopApp(returnValue = invisible())
+  })
+
 observe({
   if(input$GO > 0 ){
   x<- normalizePath(choose.files(multi=FALSE))
