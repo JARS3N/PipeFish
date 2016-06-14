@@ -59,4 +59,14 @@ TO_ <-system.file(package="PipeFish",path='scripts');
 file.copy(from=FROM_,to=TO_)
 }
 
- 
+ ## FIX for 2.3 Excel Files
+fndLVLs<-function(u){
+#read sheet names
+shts<-readxl::excel_sheets(u)
+# is Level a sheetname
+there<-any(!grepl('Level',shts))
+#if it isn't there use Raw, else use Level
+  if (there){
+    'Raw'
+  }else{'Level'}
+}
