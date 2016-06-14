@@ -5,7 +5,7 @@ library(dplyr)
 library(XML)
 
 shinyServer(function(input, output) {
-    observeEvent(input$DONE, {
+    observeEvent(input$Quit, {
         stopApp(returnValue = invisible())
      })
 
