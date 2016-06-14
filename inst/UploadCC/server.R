@@ -5,6 +5,11 @@ library(dplyr)
 library(XML)
 
 shinyServer(function(input, output) {
+    observeEvent(input$DONE, {
+        stopApp(returnValue = invisible())
+     })
+
+
     observe({
         output$MSG <- renderText("Ready")
         if(input$goButton > 0){
