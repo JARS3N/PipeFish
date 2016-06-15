@@ -19,7 +19,7 @@ PreProcessTC <-function(u){#where u is the csv file csv file
   dplyr::mutate(fl=u))
   }
   
-  TCall<-function(u){#where us is the directory of csv files to run
+  TCall<-function(u){#where u is the directory of csv files to run
   list.files(path=u,pattern="csv",full.names=TRUE) %>%
   lapply(.,PipeFish::PreProcessTC) %>%
   lapply(.,function(u){
