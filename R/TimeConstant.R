@@ -24,6 +24,6 @@ PreProcessTC <-function(u){#where u is the csv file csv file
   lapply(.,PipeFish::PreProcessTC) %>%
   lapply(.,function(u){
           group_by(u,Chan) %>%
-          summarise(TC=PipeFish::TC(data.frame(Time=Time,counts=counts)))
+          summarise(TC=PipeFish::TC(data.frame(Time=Time,counts=counts)))}
         )
   }
