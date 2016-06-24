@@ -16,7 +16,7 @@ PreProcessTC <-function(u){#where u is the csv file csv file
   dplyr::select(.,-contains('LOW'),Time=contains('Time'),contains('High')) %>% 
   tidyr::gather('Chan','counts',-contains("Time"))%>%
   dplyr::mutate(Chan=gsub("High ","",Chan))  %>%
-  dplyr::mutate(fl=u))
+  dplyr::mutate(fl=u)
   }
   
   TCall<-function(u){#where u is the directory of csv files to run
