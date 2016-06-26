@@ -65,3 +65,7 @@ fndLVLs<-function(u){
     'Level'
   }else{'Raw'}
 }
+
+
+qt<-{ . %>% print(paste0("you used: ",.)}
+
