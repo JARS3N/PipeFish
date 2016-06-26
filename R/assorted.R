@@ -67,5 +67,5 @@ fndLVLs<-function(u){
 }
 
 
-qt<-{ require(magrittr). %>% print(paste0("you used: ",.))}
+qt<-{ require(magrittr);. %>% print(paste0("you used: ",.))}
 
