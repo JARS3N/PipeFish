@@ -67,5 +67,5 @@ fndLVLs<-function(u){
 }
 
 
-qt<-{ . %>% print(paste0("you used: ",.)}
+qt<-{ . %>% print(paste0("you used: ",.))}
 
