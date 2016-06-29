@@ -22,7 +22,7 @@ shinyServer(function(input, output) {
                 lapply(.,XML::xmlTreeParse) %>%
                 lapply(.,PipeFish::Collect) %>%
                 lapply(.,PipeFish::ComboAssay) %>%
-                rbind_all(.) %>%
+                dplyr::bind_rows(.)%>%
                as.data.frame(.)
                }else{
                DF<- DIR %>%
@@ -30,7 +30,7 @@ shinyServer(function(input, output) {
                 lapply(.,XML::xmlTreeParse) %>%
                 lapply(.,PipeFish::Collect) %>%
                 lapply(.,PipeFish::assay) %>%
-                rbind_all(.) %>%
+                dplyr::bind_rows(.) %>%
                as.data.frame(.)
                }
                
