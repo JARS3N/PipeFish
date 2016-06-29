@@ -75,14 +75,14 @@ Analyte<-AnalyteIndex(u)
             Tick=j-1,
             Well=factor(1:length(Q[[j]][["AnalyteDataSetsByAnalyteName"]][1][["Item"]][["Value"]][["AnalyteDataSet"]][["CorrectedEmissionValues"]])))
     })
-    merge(rbind_all(Lst),TickTable(u),by='Tick')
+    merge(bind_rows(Lst),TickTable(u),by='Tick')
 }
 
 
 
 TickTable<-function(u){
  Q<-u[['doc']][[1]][["AssayDataSet"]][["RateSpans"]]
-    rbind_all(lapply(1:length(Q),function(i){
+    rbind_rows(lapply(1:length(Q),function(i){
                qfrom=as.numeric(xmlValue(Q[[i]][["StartTickIndex"]]));
                qto=as.numeric(xmlValue(Q[[i]][["EndTickIndex"]]));
                Measure<-i;
