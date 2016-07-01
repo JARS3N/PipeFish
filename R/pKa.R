@@ -103,3 +103,14 @@ XML::xmlTreeParse(u) %>%
   dplyr::summarise(.,counts=mean(counts))
 }
 
+pKa2<-function(pHFluor,MFBatch,Directory){
+  FileOut<-file.path(Directory,paste0(pHFluor,"pKa.Rmd"))
+  list.files(path=Directory,pattern='asyr',full.names = TRUE)   %>%
+    lapply(.,grabe96asyr) %>% 
+    dplyr::bind_rows() %>%
+    write.csv(x=.,file=file.path(Directory,"data.csv"),row.names=F)
+  createRmd(pHFluor,MFBatch,Directory) %>%
+    writeLines(text=.,con=file.path(Directory,paste0(pHFluor,"pKa.Rmd")),sep="\n")
+  rmarkdown::render(input=FileOut)
+}
+
