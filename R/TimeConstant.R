@@ -19,11 +19,11 @@ PreProcessTC <-function(u){#where u is the csv file csv file
   dplyr::mutate(fl=u)
   }
   
-  TCall<-function(u){#where u is the directory of csv files to run
+ TCall<-function(u){#where u is the directory of csv files to run
+ require(dplyr)
   list.files(path=u,pattern="csv",full.names=TRUE) %>%
-  lapply(.,PipeFish::PreProcessTC) %>%
-  lapply(.,function(u){
-          group_by(u,Chan,fl) %>%
-          summarise(TC=PipeFish::TC(data.frame(Time=Time,counts=counts)))}
-        )
-  }
+    lapply(.,PipeFish::PreProcessTC) %>%
+    bind_rows(.) %>% 
+    group_by(.,Chan,fl) %>% 
+    summarize(TC=PipeFish::TC(data.frame(Time=Time,counts=counts)))
+}
