@@ -82,7 +82,7 @@ Analyte<-AnalyteIndex(u)
 
 TickTable<-function(u){
  Q<-u[['doc']][[1]][["AssayDataSet"]][["RateSpans"]]
-    rbind_rows(lapply(1:length(Q),function(i){
+    bind_rows(lapply(1:length(Q),function(i){
                qfrom=as.numeric(xmlValue(Q[[i]][["StartTickIndex"]]));
                qto=as.numeric(xmlValue(Q[[i]][["EndTickIndex"]]));
                Measure<-i;
