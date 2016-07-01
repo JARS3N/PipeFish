@@ -89,5 +89,17 @@ createRmd<-function(pHFluor,MFBatch,Directory){
 }
 
 
-
+grabe96asyr<-function(u){
+require(dplyr)
+XML::xmlTreeParse(u) %>% 
+  PipeFish::Collect(.) %>% 
+  .$LVL %>% 
+  dplyr::mutate(.,fl=u) %>% 
+  filter(.,Tick %in% tickfilter.A(Tick)) %>% 
+  dplyr::select(.,counts=pHlvl,Tick,Well) %>% 
+  dplyr::mutate(.,pH=pH[as.numeric(factor(Well))]) %>% 
+  merge(.,data.frame(dye=c(rep('CL',6),rep('PR',6)),Well=unique(.['Well'])),by="Well") %>%
+  dplyr::group_by(.,Well,pH,dye,fl) %>% 
+  dplyr::summarise(.,counts=mean(counts))
+}
 
