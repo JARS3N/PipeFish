@@ -61,7 +61,7 @@ asyr_createRmd<-function (pHFluor, MFBatch, Directory) {
 asyr_pKa<-function(pHFluor,MFBatch,Platform,Directory){
   FileOut<-file.path(Directory,paste0(pHFluor,"pKa.Rmd"))
   list.files(path=Directory,pattern='asyr',full.names = TRUE)   %>%
-    XML::xmlTreeParse(u) %>% 
+    lapply( .,XML::xmlTreeParse) %>% 
     PipeFish::Collect(.) %>% 
     lapply(.,asyr_mungelist[[as.numeric(Platform)]]) %>% 
     dplyr::bind_rows() %>%
