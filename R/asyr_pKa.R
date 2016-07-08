@@ -20,7 +20,7 @@ asyr_grabXFp<-function(u){
   pH<-c(3.8,5,5.8,6.6,7.0,7.4,8.15,9.2)
   u %>% 
     .$LVL %>%
-    dplyr::select(.,counts=contains("pH Corrected Em."),Tick,Well,fl)%>%
+    dplyr::select(.,counts=contains("pH Corrected Em."),Tick,Well)%>%
     dplyr::filter(.,Tick %in% tickfilter.B(Tick)) %>%
     dplyr::mutate(.,Tick=as.numeric(factor(Tick))) %>%
     dplyr::mutate(.,dye = c("CL","PR")[as.numeric(factor(Tick>3))],pH=pH[as.numeric(factor(Well))]) %>%
@@ -33,7 +33,7 @@ asyr_grab24<-function(u){
   pH=c(rep(3.8,3),rep(5,3),rep(5.8,3),rep(6.6,3),rep(7.0,3),rep(7.4,3),rep(8.15,3),rep(9.2,3))
   u %>% 
     .$LVL %>% 
-    dplyr::select(.,counts=contains("pH Corrected Em."),Tick,Well,fl)%>%
+    dplyr::select(.,counts=contains("pH Corrected Em."),Tick,Well)%>%
     dplyr::filter(.,Tick %in% tickfilter.B(Tick)) %>%
     dplyr::mutate(.,Tick=as.numeric(factor(Tick))) %>%
     dplyr::mutate(.,dye = c("CL","PR")[as.numeric(factor(Tick>3))],pH=pH[as.numeric(factor(Well))]) %>%
