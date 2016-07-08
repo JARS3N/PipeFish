@@ -34,6 +34,13 @@ Outandsave<-function(path_in=getwd()){
   }
 }
 
+
+torquemada<-function(Dir){
+shell(paste0('torquemada',' "',Dir,'" -s'))
+}
+
+
+
 ################
 #PipeFishGUI<-function(){shell.exec(system.file(path='/gui/PipeFish.exe',package='PipeFish'))}
 
