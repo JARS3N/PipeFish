@@ -40,7 +40,7 @@ grab24e<-function(u){
 ###############
 grabXF24<-function(u){
   pH=c(rep(3.8,3),rep(5,3),rep(5.8,3),rep(6.6,3),rep(7.0,3),rep(7.4,3),rep(8.15,3),rep(9.2,3))
-  readxl::read_excel(u,sheet="Levels",startRow = 12,readxl = FALSE,skipEmptyRows=FALSE) %>%
+  readxl::read_excel(u,sheet=PipeFish::fndLVLs(u)) %>%
     dplyr::mutate(.,fl=u) %>%
    dplyr::select(.,counts=contains("pH.Cor..Em." ),Tick,Well,fl) %>%
    dplyr::filter(.,Tick %in% tickfilter.B(Tick)) %>%
