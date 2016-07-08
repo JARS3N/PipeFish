@@ -9,7 +9,8 @@ Collect<-function(X){
         sn = xmlValue(X[["doc"]][[1]][["Cartridge"]][["Serial"]]),
         Lot = paste0(xmlValue(X[["doc"]][[1]][["Cartridge"]][["Type"]]),
                      xmlValue(X[["doc"]][[1]][["Cartridge"]][["Lot"]])),
-        assay=determineAssay(X)
+        assay=determineAssay(X),
+        file=X[['doc']]['file']
     )
 }
 
