@@ -13,13 +13,21 @@ library(gridExtra)
 library(ggthemes)
 data<-read.csv('data.csv')
 models<-lapply(split(data,data$dye),function(x){nls(counts ~ SSfpl(pH, Bottom, Top, pKa, Slope), x)})
+model.names<-models  %>% {names(.) %>% split(.,.)}
 pHvals <- seq(min(data$pH), max(data$pH), length.out=150) 
-linedata<-lapply(models,function(u){predict(u, data.frame(pH=pHvals))[1:150]})
-ld<-split(names(linedata),names(linedata))
-titrlines<-lapply(ld,function(u){data.frame(val=linedata[[u]],dye=u,pH=pHvals)}) %>% Reduce(f='rbind')
+linedata<-model.names %>% 
+  lapply(.,{.  %>%  
+      models[[.]]  %>% 
+      predict(.,data.frame(pH=pHvals)) %>% 
+      .[1:150]})
+titrlines<-lapply(model.names,{.  %>% data.frame(val=linedata[[.]],dye=.,pH=pHvals)}) %>% bind_rows()
 cols <- c("CL" = "cornflowerblue","PR" = "red")
 
-titrPlot<-ggplot(data,aes(x=pH,y=counts,colour=dye,fill=dye))+geom_jitter(aes(fill=dye),size=2,shape=16,alpha=.7) +geom_line(data=titrlines,aes(x=pH,y=val,colour=dye))+theme_few()+ggtitle('Titration Curve')+guides(colour = FALSE,fill=FALSE) +scale_colour_manual(values = cols)
+titrPlot<-ggplot(data,aes(x=pH,y=counts,colour=dye,fill=dye))+geom_jitter(aes(fill=dye),size=2,shape=16,alpha=.7)+
+geom_line(data=titrlines,aes(x=pH,y=val,colour=dye))+
+theme_few()+ggtitle('Titration Curve')+
+guides(colour = FALSE,fill=FALSE) +
+scale_colour_manual(values = cols)
 
 
 ## lines for effective range
@@ -28,7 +36,7 @@ max10<-function(z){max(z) - ((max(z) - min(z))/10)}
 LowLine<-function(u){b<-min10(u);which(abs(u - b) == min(abs(u - b)))}
 HighLine<-function(u){b<-max10(u);which(abs(u - b) == min(abs(u - b)))}
 #
-pH.index<-c(lapply(linedata,LowLine),lapply(linedata,HighLine))%>%Reduce(x=.,f='rbind')
+pH.index<-c(lapply(linedata,LowLine),lapply(linedata,HighLine)) %>% dplyr::bind_rows()
 
 EfRange<-data.frame(vline=pHvals[pH.index],dye=factor(c('CL','PR')))
 
