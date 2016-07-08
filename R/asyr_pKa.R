@@ -58,7 +58,7 @@ asyr_createRmd<-function (pHFluor, MFBatch, Directory) {
 }
 
 
-asyr_pKa<-function(pHFluor,MFBatch,Directory){
+asyr_pKa<-function(pHFluor,MFBatch,Platform,Directory){
   FileOut<-file.path(Directory,paste0(pHFluor,"pKa.Rmd"))
   list.files(path=Directory,pattern='asyr',full.names = TRUE)   %>%
     XML::xmlTreeParse(u) %>% 
