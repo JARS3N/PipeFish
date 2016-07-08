@@ -17,6 +17,7 @@ asyr_grab96<-function(u){
 
 #####################
 asyr_grabXFp<-function(u){
+ require(dplyr)
   pH<-c(3.8,5,5.8,6.6,7.0,7.4,8.15,9.2)
   u %>% 
     .$LVL %>%
@@ -30,6 +31,7 @@ asyr_grabXFp<-function(u){
 
 ################################
 asyr_grab24<-function(u){
+ require(dplyr)
   pH=c(rep(3.8,3),rep(5,3),rep(5.8,3),rep(6.6,3),rep(7.0,3),rep(7.4,3),rep(8.15,3),rep(9.2,3))
   u %>% 
     .$LVL %>% 
