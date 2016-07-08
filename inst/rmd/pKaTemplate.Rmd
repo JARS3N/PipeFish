@@ -11,7 +11,7 @@ library(dplyr)
 library(ggplot2)
 library(gridExtra)
 library(ggthemes)
-data<-read.csv('data.csv')
+data<-rio::import('data.csv')
 models<-lapply(split(data,data$dye),function(x){nls(counts ~ SSfpl(pH, Bottom, Top, pKa, Slope), x)})
 model.names<-models  %>% {names(.) %>% split(.,.)}
 pHvals <- seq(min(data$pH), max(data$pH), length.out=150) 
