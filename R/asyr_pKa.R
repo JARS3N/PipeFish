@@ -68,7 +68,7 @@ asyr_pKa<-function(pHFluor,MFBatch,Platform,Directory){
     lapply(.,asyr_mungelist[[as.numeric(Platform)]]) %>% 
     dplyr::bind_rows() %>%
     write.csv(x=.,file=file.path(Directory,"data.csv"),row.names=F)
-  createRmd(pHFluor,MFBatch,Directory) %>%
+  asyr_createRmd(pHFluor,MFBatch,Directory) %>%
     writeLines(text=.,con=file.path(Directory,paste0(pHFluor,"pKa.Rmd")),sep="\n")
   rmarkdown::render(input=FileOut)
 }
