@@ -10,7 +10,7 @@ Collect<-function(X){
         Lot = paste0(xmlValue(X[["doc"]][[1]][["Cartridge"]][["Type"]]),
                      xmlValue(X[["doc"]][[1]][["Cartridge"]][["Lot"]])),
         assay=determineAssay(X),
-        file=X[['doc']]['file']
+        file=basename(X[['doc']]['file'][[1]])
     )
 }
 
