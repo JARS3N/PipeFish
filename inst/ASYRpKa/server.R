@@ -15,5 +15,6 @@ shinyServer(function(input, output, session) {
       DIR<-choose.dir()
        if(input$CB==TRUE){PipeFish::torquemada(DIR)}
      PipeFish::asyr_pKa(input$pHFluor,input$MFBatch,input$Platform,DIR)
+    }
   })
 })
