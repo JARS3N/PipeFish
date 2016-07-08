@@ -13,6 +13,7 @@ shinyServer(function(input, output, session) {
   observe({
     if(input$BB > 0 ){
       DIR<-choose.dir()
-      PipeFish::pKa2(input$pHFluor,input$MFBatch,DIR)
+       if(input$CB==TRUE){PipeFish::torquemada(DIR)}
+     PipeFish::asyr_pKa(input$pHFluor,input$MFBatch,input$Platform,DIR)
   })
 })
