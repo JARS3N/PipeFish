@@ -59,7 +59,7 @@ asyr_createRmd<-function (pHFluor, MFBatch, Directory) {
   readLines(system.file("rmd/pKaTemplate.Rmd", package = "PipeFish")) %>% 
     gsub("XBATCHX", MFBatch, .) %>% 
     gsub("XLOTX", pHFluor, .) %>% 
-    gsub(rio::import('data.csv'),imp ,.)
+    gsub("rio::import('data.csv')",imp ,.)
 }
 
 intermediateStep<-function(u){
