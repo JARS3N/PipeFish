@@ -67,16 +67,19 @@ determineAssay<-function(X){
 
 
 get_lvls<-function(u){
-Analyte<-AnalyteIndex(u)
-    Q<-u[['doc']][[1]][["AssayDataSet"]][["PlateTickDataSets"]]
-    Lst<-lapply(seq_along(Q),function(j){
-        data.frame(
-            pHlvl=as.numeric(xmlSApply(Q[[j]][["AnalyteDataSetsByAnalyteName"]][Analyte["pH"]][["Item"]][["Value"]][["AnalyteDataSet"]][["CorrectedEmissionValues"]],xmlValue)),
-            O2lvl=as.numeric(xmlSApply(Q[[j]][["AnalyteDataSetsByAnalyteName"]][Analyte["O2"]][["Item"]][["Value"]][["AnalyteDataSet"]][["CorrectedEmissionValues"]],xmlValue)),
-            Tick=j-1,
-            Well=factor(1:length(Q[[j]][["AnalyteDataSetsByAnalyteName"]][1][["Item"]][["Value"]][["AnalyteDataSet"]][["CorrectedEmissionValues"]])))
-    })
-    merge(bind_rows(Lst),TickTable(u),by='Tick')
+  index<-c(1,2)
+  AnalyteLoc<-u[['doc']][[1]][["AssayDataSet"]][["PlateTickDataSets"]][[1]][["AnalyteDataSetsByAnalyteName"]]
+  nms<-c(xmlValue(AnalyteLoc[[1]][['Key']][['string']][['text']]),xmlValue(AnalyteLoc[[2]][['Key']][['string']][['text']]))
+  names(index)<-nms
+  Q<-u[['doc']][[1]][["AssayDataSet"]][["PlateTickDataSets"]]
+  Lst<-lapply(seq_along(Q),function(j){
+    data.frame(
+      pHlvl=as.numeric(xmlSApply(Q[[j]][["AnalyteDataSetsByAnalyteName"]][index["pH"]][["Item"]][["Value"]][["AnalyteDataSet"]][["CorrectedEmissionValues"]],xmlValue)),
+      O2lvl=as.numeric(xmlSApply(Q[[j]][["AnalyteDataSetsByAnalyteName"]][index["O2"]][["Item"]][["Value"]][["AnalyteDataSet"]][["CorrectedEmissionValues"]],xmlValue)),
+      Tick=j-1,
+      Well=factor(1:length(Q[[j]][["AnalyteDataSetsByAnalyteName"]][1][["Item"]][["Value"]][["AnalyteDataSet"]][["CorrectedEmissionValues"]])))
+  })
+  merge(bind_rows(Lst),TickTable(u),by='Tick')
 }
 
 
