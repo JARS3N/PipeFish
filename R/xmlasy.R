@@ -69,7 +69,7 @@ determineAssay<-function(X){
 get_lvls<-function(u){
 Analyte<-AnalyteIndex(u)
     Q<-u[['doc']][[1]][["AssayDataSet"]][["PlateTickDataSets"]]
-    Lst<-lapply(1:length(Q),function(j){
+    Lst<-lapply(seq_along(Q),function(j){
         data.frame(
             pHlvl=as.numeric(xmlSApply(Q[[j]][["AnalyteDataSetsByAnalyteName"]][Analyte["pH"]][["Item"]][["Value"]][["AnalyteDataSet"]][["CorrectedEmissionValues"]],xmlValue)),
             O2lvl=as.numeric(xmlSApply(Q[[j]][["AnalyteDataSetsByAnalyteName"]][Analyte["O2"]][["Item"]][["Value"]][["AnalyteDataSet"]][["CorrectedEmissionValues"]],xmlValue)),
