@@ -11,7 +11,7 @@ asyr_grab96<-function(u){
     merge(.,data.frame(dye=c(rep('CL',6),rep('PR',6)),Well=unique(.['Well'])),by="Well") %>%
     dplyr::group_by(.,Well,pH,dye) %>% 
     dplyr::summarise(.,counts=mean(counts)) %>% 
-    dplyr::mutate(.,fl=u$file) 
+    dplyr::mutate(.,fl=u[['file']]) 
 }
 
 
@@ -26,7 +26,7 @@ asyr_grabXFp<-function(u){
     dplyr::mutate(.,Tick=as.numeric(factor(Tick))) %>%
     dplyr::mutate(.,dye = c("CL","PR")[as.numeric(factor(Tick>3))],pH=pH[as.numeric(factor(Well))]) %>%
     dplyr::group_by(.,Well,pH,dye) %>%dplyr::summarise(.,counts=mean(counts)) %>% 
-    dplyr::mutate(.,fl=u$file)
+    dplyr::mutate(.,fl=u[['file']])
 }
 
 ################################
@@ -41,7 +41,7 @@ asyr_grab24<-function(u){
     dplyr::mutate(.,dye = c("CL","PR")[as.numeric(factor(Tick>3))],pH=pH[as.numeric(factor(Well))]) %>%
     dplyr::group_by(.,Well,pH,dye) %>%
     dplyr::summarise(.,counts=mean(counts)) %>% 
-    dplyr::mutate(.,fl=u$file)
+    dplyr::mutate(.,fl=u[['file']])
 }
 
 ##################
