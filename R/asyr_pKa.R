@@ -49,16 +49,18 @@ asyr_mungelist<-list(asyr_grab96,asyr_grab24,asyr_grabXFp)
 ####function to run pKa
 ###################
 
+
 asyr_createRmd<-function (pHFluor, MFBatch, Directory) {
   file.path(Directory,"data.feather") %>% 
     file.exists(.) %>% 
     if(.){DATA<<- "data.feather"}else{DATA<<- "data.csv"} 
+  fp<-shQuote(file.path(Directory, DATA))
+  imp<-paste('rio::import(',fp,')')
   readLines(system.file("rmd/pKaTemplate.Rmd", package = "PipeFish")) %>% 
     gsub("XBATCHX", MFBatch, .) %>% 
     gsub("XLOTX", pHFluor, .) %>% 
-    gsub(rio::import('data.csv'), paste0('rio::import("',file.path(Directory, DATA),'")',.)
+    gsub(rio::import('data.csv'),imp ,.)
 }
-
 
 intermediateStep<-function(u){
 u %>%
