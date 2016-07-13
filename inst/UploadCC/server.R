@@ -45,7 +45,7 @@ shinyServer(function(input, output) {
                               host=ConnectInfo[4],
                               port=as.numeric(ConnectInfo[5]))
            output$MSG <- renderText("Writing to Database")
-            dbWriteTable(my_db, name=c("xfpwetqc","xfe24wetqc","xfe96wetqc")[input$PLAT], value=DF,append=TRUE,overwrite = FALSE,row.names=FALSE)
+            dbWriteTable(my_db, name=c("xfpwetqc","xfe24wetqc","xfe96wetqc")[as.numeric(input$PLAT)], value=DF,append=TRUE,overwrite = FALSE,row.names=FALSE)
             dbDisconnect(my_db)
             output$MSG <- renderText("Complete")
             }})
