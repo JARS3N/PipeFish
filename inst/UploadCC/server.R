@@ -17,7 +17,7 @@ shinyServer(function(input, output) {
             DIR<-choose.dir();
             output$MSG <- renderText("Munging Data...")
             if(input$PLAT ==1){
-           DF<- DIR %>%
+           DF<<- DIR %>%
                 list.files(path=.,pattern='asyr',full.names=TRUE) %>%
                 lapply(.,XML::xmlTreeParse) %>%
                 lapply(.,PipeFish::Collect) %>%
@@ -25,7 +25,7 @@ shinyServer(function(input, output) {
                 dplyr::bind_rows(.)%>%
                as.data.frame(.)
                }else{
-               DF<- DIR %>%
+               DF<<- DIR %>%
                 list.files(path=.,pattern='asyr',full.names=TRUE) %>%
                 lapply(.,XML::xmlTreeParse) %>%
                 lapply(.,PipeFish::Collect) %>%
