@@ -37,7 +37,7 @@ getSn<-function(u){
 }
 
 getLot<-function(X){
-  Lot<-paste0(getCtgType(X),
+  Lot<-paste0(xmlValue(X[["doc"]][[1]][["Cartridge"]][["Type"]]),
               xmlValue(X[["doc"]][[1]][["Cartridge"]][["Lot"]]))
   if (length(Lot)==0){
     regexp<-"[W,B,C,Q,T]{1}[E,0-9]{1}[0-9]{4}"
