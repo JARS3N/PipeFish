@@ -20,7 +20,7 @@ AnalyteIndex<-function(X){
   Analyte
 }
 ## Adding because of Legacy
-getFile(Z){basename(Z[['doc']]['file'][[1]])}
+getFile<-function(Z){basename(Z[['doc']]['file'][[1]])}
 getInst<-function(Z){xmlValue(Z[["doc"]][[1]][["InstrumentSerialNumber"]])}
 
 
