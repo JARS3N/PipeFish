@@ -42,7 +42,7 @@ getLot<-function(X){
   if (length(Lot)==0){
   flx<-getFile(X)
     regexp<-"[W,B,C,Q,T]{1}[E,0-9]{1}[0-9]{4}"
-    Lot<- unlist(regmatches( flx, gregexpr(regexp, flx)))
+    Lot<- paste0(unlist(regmatches( flx, gregexpr(regexp, flx))))
   }
   return(Lot)
 }
