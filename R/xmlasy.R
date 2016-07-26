@@ -29,9 +29,9 @@ getSn<-function(u){
   x<-basename(u[['doc']]['file'][[1]])
   regexp<-"_[0-9]{1,3}_"
   if(length(sn)==0){
-    Lot<- unlist(regmatches(x, gregexpr(regexp, x))) 
-    Lot<-gsub("_","",Lot)
-    return(sprintf("%05d",Lot))
+    sn<- unlist(regmatches(x, gregexpr(regexp, x))) 
+    sn<-gsub("_","",sn)
+    return(sn))
   }else{
     return(sn)}
 }
