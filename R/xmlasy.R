@@ -31,7 +31,7 @@ getSn<-function(u){
   if(length(sn)==0){
     sn<- unlist(regmatches(x, gregexpr(regexp, x))) 
     sn<-gsub("_","",sn)
-    return(sn))
+    return(sn)
   }else{
     return(sn)}
 }
