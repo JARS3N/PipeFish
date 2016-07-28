@@ -186,6 +186,7 @@ assay<-function(X){
   AL<-list("Gain"=PipeFish::newGain,"Ksv"=PipeFish::Ksv)
  A<- AL[[X$assay]](X) %>%
     mutate(sn=X$sn,Inst=X$Inst)
+    # to fix -- Error: Unsupported type NILSXP for column "Lot"
     A$Lot <- X$Lot
     A
 }
