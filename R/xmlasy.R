@@ -184,7 +184,9 @@ Ksv<-function(X){
 
 assay<-function(X){
   AL<-list("Gain"=PipeFish::newGain,"Ksv"=PipeFish::Ksv)
-  AL[[X$assay]](X) %>%
-    mutate(sn=X$sn,Inst=X$Inst,Lot=X$Lot)
+ A<- AL[[X$assay]](X) %>%
+    mutate(sn=X$sn,Inst=X$Inst)
+    A$Lot <- X$Lot
+    A
 }
 
