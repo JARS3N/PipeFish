@@ -191,3 +191,12 @@ assay<-function(X){
     A
 }
 
+whichAssay<-function(X){
+  type<-substr(X$Lot,1,1)
+  if(type=="C"){
+    PipeFish::ComboAssay(X)
+  }else{
+    PipeFish::assay(X)
+  }
+}
+
