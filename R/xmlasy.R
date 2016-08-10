@@ -155,7 +155,7 @@ ComboAssay<-function(X){
       mutate(Well=as.numeric(Well))
   )
   merge(Dat$pHgain,Dat$O2gain,by='Well') %>%
-    mutate(.,inst=as.character(X$Inst))%>%
+    mutate(.,Inst=as.character(X$Inst))%>%
     mutate(.,sn=as.character(X$sn)) %>%
     mutate(.,Lot=as.character(X$Lot))
 }
