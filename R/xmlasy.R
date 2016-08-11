@@ -202,6 +202,7 @@ whichAssay<-function(X){
 
 
 UploadsCC<-function(u){
+require(RMySQL)
   platstring<-c(
     "C" ="xfpwetqc",
     "B" = "xfe24wetqc",
