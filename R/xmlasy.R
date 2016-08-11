@@ -220,13 +220,13 @@ require(RMySQL)
   un.u<-unique(u$type)
   if (length(un.u)==1){
     select(u,-type) %>% 
-      dbWriteTable(my_db, name=unname(platsting[un.u]),value=.,
+      dbWriteTable(my_db, name=unname(platstring[un.u]),value=.,
                    append=TRUE,overwrite = FALSE,row.names=FALSE)
     dbDisconnect(my_db)
   }else{
     filter(u,type== un.u[1]) %>% 
       select(.,-type) %>% 
-      dbWriteTable(my_db, name=unname(platsting[un.u[1]]),value=.,
+      dbWriteTable(my_db, name=unname(platstring[un.u[1]]),value=.,
                    append=TRUE,overwrite = FALSE,row.names=FALSE)
     dbDisconnect(my_db)
     filter(u,type!= un.u[1]) %>% 
