@@ -22,6 +22,7 @@ Imports:
 	ggthemes,
 	XML,
 	shiny,
-	RMySQL
+	RMySQL,
+	miniUI
 License: none
 LazyData: TRUE
