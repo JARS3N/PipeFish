@@ -73,6 +73,14 @@ fndLVLs<-function(u){
   }else{'Raw'}
 }
 
-
-
+##### fix Shiny file Input
+ fixShinyFileInput<-function(InputFile){
+    dir<-dirname(InputFile$datapath)
+    bn<-basename(InputFile$datapath)
+    fn<-InputFile$name
+    fixedDP<-file.path(dir,fn)
+    file.rename(InputFile$datapath,fixedDP)
+    InputFile$datapath<-fixedDP
+    InputFile
+  }
 
