@@ -1,4 +1,4 @@
-UploadDRYQC2 <- function() {
+UploadDRYQC <- function() {
   require(shiny)
   require(PipeFish)
   require(miniUI)
