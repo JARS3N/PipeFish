@@ -54,7 +54,7 @@ ui <- shinyUI(fluidPage(
   titlePanel("PipeFish::Glyco2BufferCapacity"),
   br(),
   mainPanel(
-    textInput('expnm',"Name of Experiment", value = "OutlierAnalysis", width = NULL),
+    textInput('expnm',"Name of Experiment", value = "BufferCapacityAnalysis", width = NULL),
     checkboxInput("CB", label = "Export from .Asyr", value = FALSE),
     br(),
     actionButton("BB","Run Analysis"),
