@@ -78,7 +78,7 @@ server <- shinyServer(function(input, output, session) {
     if(input$BB > 0 ){
       DIR<-choose.dir()
       if(input$CB==TRUE){PipeFish::Outandsave(DIR);DIR<-file.path(DIR,'export')}
-      DF<-list.files(DIR,full.names=T) %>% lapply(.,G2BC) %>% bind_rows()
+      DF<-list.files(DIR,full.names=T,pattern='xlsx') %>% lapply(.,G2BC) %>% bind_rows()
       svpth<-file.path(DIR,paste0(input$expnm,".csv"))
       output$session <- renderText(svpth)
       output$test1 <- renderTable({DF})
