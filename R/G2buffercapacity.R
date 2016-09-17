@@ -4,7 +4,7 @@ require(dplyr)
 require(readxl)
 require(tidyr)
 # determine assay used
- assay<- gregexpr("inj|titr", tolower(basename(fl))) %>%  regmatches(basename(fl), .) %>% unlist()
+ assay<- gregexpr("inj|titr", tolower(basename(fl))) %>%  regmatches(basename(fl), .) %>% unlist() %>% tolower()
 # read in excel sheet
  fl%>% readxl::read_excel(.,sheet="Raw")%>% 
     select(.,Measurement,Tick,Well,pH) %>% 
