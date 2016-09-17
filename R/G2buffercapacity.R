@@ -49,6 +49,7 @@ require(tidyr)
 G2BCAPP<-function(){
 require(shiny)
 require(PipeFish)
+require(dplyr)
 # Define UI for application that draws a histogram
 ui <- shinyUI(fluidPage(
   titlePanel("PipeFish::Glyco2BufferCapacity"),
