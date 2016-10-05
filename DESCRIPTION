@@ -23,6 +23,7 @@ Imports:
 	XML,
 	shiny,
 	RMySQL,
-	miniUI
+	miniUI,
+	digest
 License: none
 LazyData: TRUE
