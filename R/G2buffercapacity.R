@@ -66,8 +66,6 @@ ui <- shinyUI(fluidPage(
     tableOutput("test1")
   )))
   
-
-# Define server logic required to draw a histogram
 server <- shinyServer(function(input, output, session) {
   
   observeEvent(input$Quit, {
