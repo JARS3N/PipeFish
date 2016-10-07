@@ -16,14 +16,14 @@
 #    dir.create(file.path((.libPaths()[1]),"DataStash")) 
 #  }}
   
-  DBinfo<-function(){
-  fp<-file.path((.libPaths()[LISTlib("DataStash")]),"DataStash","DBinfo.RDS")
-  readRDS(fp)
-  }
+#  DBinfo<-function(){
+#  fp<-file.path((.libPaths()[LISTlib("DataStash")]),"DataStash","DBinfo.RDS")
+#  readRDS(fp)
+#  }
 
-LISTlib<-function(q){
-unlist(lapply(.libPaths(),function(u){all(dir.exists(file.path(u,q)))}))
-}
+#LISTlib<-function(q){
+#unlist(lapply(.libPaths(),function(u){all(dir.exists(file.path(u,q)))}))
+#}
 
 givename<-function(u,splits=": "){
   Q <-strsplit(u,split=splits);  
