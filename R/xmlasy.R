@@ -17,7 +17,6 @@ CollectNoLVL<-function(X){
   require(dplyr)
   list(
     CAL = CalData(X),
-    LVL = get_lvls(X),
     PH_COEF=pH_coefs(X),
     Inst = getInst(X),
     sn = getSn(X),
