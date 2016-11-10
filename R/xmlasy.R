@@ -106,6 +106,8 @@ unlisted<-function(U){
       Reduce(f='c',x=.),
     CalEmission=lapply(xmlChildren(U[["CalibrationEmissionValues"]]),function(j){as.numeric(xmlSApply(j,xmlValue))}) %>%
       Reduce(f='c',x=.),
+    IntialReferenceDelta=lapply(xmlChildren(U[["IntialReferenceDeltaValues"]]),function(j){as.numeric(xmlSApply(j,xmlValue))}) %>%
+      Reduce(f='c',x=.),
     Status=lapply(xmlChildren(U[["LedStatusValues"]]),function(j){(xmlSApply(j,xmlValue))}) %>%
       Reduce(f='c',x=.)) %>%
     setNames(paste0(xmlValue(U[["AnalyteName"]]),".",names(.))) %>%
