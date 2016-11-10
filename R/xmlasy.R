@@ -17,6 +17,7 @@ CollectNoLVL<-function(X){
   require(dplyr)
   list(
     CAL = CalData(X),
+    calStartTemp=calStartTemp(X),
     PH_COEF=pH_coefs(X),
     Inst = getInst(X),
     sn = getSn(X),
@@ -36,7 +37,9 @@ AnalyteIndex<-function(X){
 getFile<-function(Z){basename(Z[['doc']]['file'][[1]])}
 getInst<-function(Z){xmlValue(Z[["doc"]][[1]][["InstrumentSerialNumber"]])}
 
-
+calStartTemp<-function(u){
+  xmlValue(u[['doc']]$children$XfeAssay['AssayDataSet']$AssayDataSet['CalibrationStartTemperature']$CalibrationStartTemperature)
+}
 getSn<-function(u){
   sn <- xmlValue(u[["doc"]][[1]][["Cartridge"]][["Serial"]])
   x<-basename(u[['doc']]['file'][[1]])
