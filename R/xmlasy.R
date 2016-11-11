@@ -279,6 +279,7 @@ CalibrationFailureModes<-function(B){
     merge(.,data.frame(file=B$file))
 }
 getCalFailureModes<-function(DIR,parswitch=50){
+  require(dplyr);
   FLS<- list.files(DIR,recursive=T,pattern='[.]asyr',full.names = T)
   if(length(FLS)<parswitch){
     FLS %>% 
