@@ -95,8 +95,8 @@ pH_coefs<-function(X){
 O2_coefs<-function(X){
   Analyte<-AnalyteIndex(X)
  coefs<- list(
- "target"= xmlValue(A[["doc"]][[1]][["AssayDataSet"]][["AnalyteCalibrationsByAnalyteName"]][Analyte["O2"]][["Item"]][2][["Value"]][["AnalyteCalibration"]][["TargetEmissionValue"]]),
- "KSV"=xmlValue(A[['doc']]$children$XfeAssay['AssayDataSet']$AssayDataSet['O2DataModifiers']$O2DataModifiers['Ksv']$Ksv) 
+ "target"=as.numeric( xmlValue(A[["doc"]][[1]][["AssayDataSet"]][["AnalyteCalibrationsByAnalyteName"]][Analyte["O2"]][["Item"]][2][["Value"]][["AnalyteCalibration"]][["TargetEmissionValue"]])),
+ "KSV"=as.numeric( xmlValue(A[['doc']]$children$XfeAssay['AssayDataSet']$AssayDataSet['O2DataModifiers']$O2DataModifiers['Ksv']$Ksv) )
  )
  coefs
 }
