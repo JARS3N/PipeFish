@@ -19,6 +19,7 @@ CollectNoLVL<-function(X){
     CAL = CalData(X),
     calStartTemp=calStartTemp(X),
     PH_COEF=pH_coefs(X),
+    O2_COEF=O2_coefs(X),
     Inst = getInst(X),
     sn = getSn(X),
     Lot = getLot(X),
@@ -91,7 +92,14 @@ pH_coefs<-function(X){
   coefs$gain<-c((coefs$slope * coefs$target)+ coefs$intercept);
   coefs
 }
-
+O2_coefs<-function(X){
+  Analyte<-AnalyteIndex(X)
+ coefs<- list(
+ "target"= xmlValue(A[["doc"]][[1]][["AssayDataSet"]][["AnalyteCalibrationsByAnalyteName"]][Analyte["O2"]][["Item"]][2][["Value"]][["AnalyteCalibration"]][["TargetEmissionValue"]]),
+ "KSV"=xmlValue(A[['doc']]$children$XfeAssay['AssayDataSet']$AssayDataSet['O2DataModifiers']$O2DataModifiers['Ksv']$Ksv) 
+ )
+ coefs
+}
 
 CalData<-function(u){
   A<- u[["doc"]][[1]][["AssayDataSet"]][["AnalyteCalibrationsByAnalyteName"]]
