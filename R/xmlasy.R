@@ -278,7 +278,7 @@ CalibrationFailureModes<-function(B){
     tidyr::gather(.,failureMode,Failed) %>% 
     merge(.,data.frame(file=B$file))
 }
-getCalFailureModes<-function(DIR,parswitch=20){
+getCalFailureModes<-function(DIR,parswitch=50){
   FLS<- list.files(DIR,recursive=T,pattern='[.]asyr',full.names = T)
   if(length(FLS)<parswitch){
     FLS %>% 
