@@ -278,9 +278,16 @@ CalibrationFailureModes<-function(B){
     tidyr::gather(.,failureMode,Failed) %>% 
     merge(.,data.frame(file=B$file))
 }
-getCalFailureModes<-function(DIR){
-  require(dplyr);
+getCalFailureModes<-function(DIR,parswitch=20){
   FLS<- list.files(DIR,recursive=T,pattern='[.]asyr',full.names = T)
+  if(length(FLS)<parswitch){
+    FLS %>% 
+    XML::xmlTreeParse(.) %>% 
+      PipeFish::CollectNoLVL(.) %>% 
+      CalibrationFailureModes(.) %>% 
+      bind_rows() %>% 
+      return()
+  }else{
   require(parallel)
   size.of.list <- length(FLS)
   cl <- makeCluster( min(size.of.list, detectCores()) )
@@ -289,5 +296,6 @@ getCalFailureModes<-function(DIR){
     parallel::parLapply(cl=cl,.,CalibrationFailureModes) %>% 
     bind_rows()
   stopCluster(cl);
-  OUT
-}
+  return(OUT)
+  }
+  }
