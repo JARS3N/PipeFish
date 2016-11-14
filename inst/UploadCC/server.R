@@ -22,7 +22,9 @@ shinyServer(function(input, output) {
         lapply(.,PipeFish::Collect) %>% 
         lapply(.,PipeFish::whichAssay) %>% 
         dplyr::bind_rows(.) %>%
+        select(.,-O2.IntialReferenceDelta,-pH.IntialReferenceDelta) %>%
         as.data.frame(.)
+        
       
       output$DF<-shiny::renderDataTable(DF)
       output$MSG <- renderText("Communicating with Database")
