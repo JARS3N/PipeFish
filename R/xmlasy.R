@@ -283,10 +283,10 @@ getCalFailureModes<-function(DIR,parswitch=50){
   FLS<- list.files(DIR,recursive=T,pattern='[.]asyr',full.names = T)
   if(length(FLS)<parswitch){
     FLS %>% 
-    XML::xmlTreeParse(.) %>% 
-      PipeFish::CollectNoLVL(.) %>% 
-      CalibrationFailureModes(.) %>% 
-      bind_rows() %>% 
+     lapply(., XML::xmlTreeParse) %>% 
+      lapply(.,PipeFish::CollectNoLVL) %>% 
+      lapply(.,CalibrationFailureModes) %>% 
+      bind_rows() %>%
       return()
   }else{
   require(parallel)
