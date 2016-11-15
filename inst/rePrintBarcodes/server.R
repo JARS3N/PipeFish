@@ -1,8 +1,7 @@
 library(shiny)
 library(dplyr)
  ConnectInfo<-DataStash::Triton()
-  my_db <- dbConnect(RMySQL::MySQL(),
-                     dbname=ConnectInfo[1],
+  my_db <- src_mysql(ConnectInfo[1],
                      user=ConnectInfo[2],
                      password=ConnectInfo[3],
                      host=ConnectInfo[4],
