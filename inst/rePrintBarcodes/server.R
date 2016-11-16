@@ -23,6 +23,7 @@ shinyServer(function(input, output,session) {
       tbl('barcodelotview') %>%
     filter(Lot_Num_Input==lotn) %>%
    filter(Cart_type==lotl) %>%
+     arrange(.,Serial_Num) %>%
     collect() %>% 
     list('Matrix'=.)
   dir<-"//lexnas03a-vs1-nas-s1lkq.agilent.com/LSAG/Seahorse Bioscience Chicopee/SH Consumables Labeling"
