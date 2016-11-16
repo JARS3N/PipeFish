@@ -92,8 +92,10 @@ ui <-miniPage( fluidPage(
 server <- function(input, output,session) {
   observeEvent(input$Run, {
     fldr<-choose.dir();
-    print(input$Recursive)
+    #print(input$Recursive)
+    if(!is.na(fldr)){
     PipeFish::UploadINSTCAL(fldr,input$Recursive)
+      }
     rm(fldr)
   }) 
 
