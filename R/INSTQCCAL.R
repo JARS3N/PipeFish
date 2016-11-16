@@ -72,3 +72,37 @@ list.files(pattern='asyr',full.names=T,path=.,recursive=recursiveIN) %>%
   dbSendListToDB(.)
 
 }
+### App below
+  
+  UploadInstQCCalApp<-function(){
+  suppressMessages(require(shiny))
+  require(PipeFish)
+  suppressMessages(require(miniUI))
+
+
+ui <-miniPage( fluidPage(
+  p("Select Directory with .asyr files to Upload "),mainPanel(
+    actionButton("Run", "Select Directory"),
+    checkboxInput("Recursive", "search recursively", FALSE),
+    textOutput("session"),
+    actionButton("DONE", "Exit"))
+
+))
+
+server <- function(input, output,session) {
+  observeEvent(input$Run, {
+    fldr<-choose.dir();
+    print(input$Recursive)
+    PipeFish::UploadINSTCAL(fldr,input$Recursive)
+    rm(fldr)
+  }) 
+
+  observeEvent(input$DONE, {
+    stopApp(returnValue = invisible())
+  }) 
+}
+
+runGadget(ui, server,viewer = dialogViewer("Upload instrument QC Calibration Data", width = 400 ,height = 400))
+
+
+}
