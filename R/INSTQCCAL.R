@@ -55,6 +55,7 @@ dbSendListToDB<-function(L){
 
 DIR %>% 
 list.files(pattern='asyr',full.names=T,path=.,recursive=recursiveIN) %>% 
+  grep("cancelled",invert=T,value=T,.) %>%
   lapply(., XML::xmlTreeParse) %>% 
   lapply(.,PipeFish::CollectNoLVL) %>% 
   lapply(.,{. %>% list(
