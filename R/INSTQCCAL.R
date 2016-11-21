@@ -19,6 +19,7 @@ dbAddINSTCAL<-function(X){
                    append=TRUE,overwrite = FALSE,row.names=FALSE)
     
     X$FailModes %>% 
+      dplyr::select(.,-file) %>%
       merge(.,nID) %>% 
       DBI::dbWriteTable(my_dbADD, name="instqccalfail",value=.,
                    append=TRUE,overwrite = FALSE,row.names=FALSE)
