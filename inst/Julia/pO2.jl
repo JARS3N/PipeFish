@@ -1,7 +1,7 @@
 function pO2(TC,atm=760)
     
     if TC < 0 || TC > 40
-        return println("Temp beyond valid model range 0-40 C") 
+        return "Temp beyond valid model range 0-40 C" 
     end
     
     function HC(TC)
