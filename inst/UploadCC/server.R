@@ -6,6 +6,12 @@ library(XML)
 
 
 shinyServer(function(input, output) {
+  
+  session$onSessionEnded(function() {
+    stopApp()
+  })
+
+  
   observeEvent(input$Quit, {
     stopApp(returnValue = invisible())
   })
