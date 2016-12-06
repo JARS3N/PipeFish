@@ -13,6 +13,11 @@ Q<-my_db %>%
   collect() %>% 
   .$Lot_Num
 shinyServer(function(input, output,session) {
+ session$onSessionEnded(function() {
+    stopApp()
+  })
+
+ 
   updateSelectInput(session,'Lot',choices=c("N/A",Q))
   
   observeEvent(input$Lot,{
