@@ -4,6 +4,7 @@ library(PipeFish)
 #scriptlist<-PipeFish::available_scripts()
 shinyUI(
   fluidPage(title="PipeFish::Scripts",
+             fluidRow(column(h4("Description"),width=9,textOutput("MSG"))),
             fluidRow(
               column(h4("Select Script"),width=4,
                      selectInput(inputId="Scripts",label="",
@@ -23,7 +24,7 @@ shinyUI(
                      actionButton(inputId="Launch",label="Launch Script", icon = icon('rocket'))
               )
               
-            ),#fluidrow
-            fluidRow(column(h4("Description"),width=9,textOutput("MSG")))
+            )#fluidrow
+           
   )#fluidpage
 )#ui
