@@ -22,7 +22,7 @@ shinyServer(function(input, output) {
   "Select folder or files for outlier analysis",
   "Select folder of asyr files for pKa analysis",
   "Select a DryQC excel file to upload to database",
-  "Resave a previously created lot of catridge barcodes to the loation targeted by Bartender software"
+  "Resave a previously created lot of catridge barcodes to the location targeted by Bartender software"
   )
   observeEvent(input$Scripts,{
     output$MSG <- renderText(descriptions[as.numeric(input$Scripts)])
