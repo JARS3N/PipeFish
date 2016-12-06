@@ -10,6 +10,11 @@ shinyServer(function(input, output, session) {
   })
 
   
+  session$onSessionEnded(function() {
+    stopApp()
+  })
+
+  
   observeEvent(input$Quit, {
     stopApp(returnValue = invisible())
   })
