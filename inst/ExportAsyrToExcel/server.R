@@ -11,3 +11,8 @@ shinyServer(function(input,output,session) {
     output$session <- renderText("Script Complete")
     })
 })
+
+
+session$onSessionEnded(function() {
+    stopApp()
+  })
