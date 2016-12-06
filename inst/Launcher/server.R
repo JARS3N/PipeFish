@@ -1,5 +1,5 @@
 library(shiny)
-shinyServer(function(input, output) {
+shinyServer(function(input, output,session) {
   
   observe({
     if(input$Launch > 0){
@@ -12,3 +12,7 @@ shinyServer(function(input, output) {
     }
     })
 })
+
+session$onSessionEnded(function() {
+    stopApp()
+  })
