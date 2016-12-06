@@ -4,7 +4,11 @@ library(RMySQL)
 library(PipeFish)
 library(dplyr)
 ConnectInfo<-PipeFish::DBinfo()
-shinyServer(function(input, output) {
+shinyServer(function(input, output,session) {
+ session$onSessionEnded(function() {
+    stopApp()
+  })
+ 
  observeEvent(input$Quit, {
     stopApp(returnValue = invisible())
   })
