@@ -6,6 +6,7 @@ shinyServer(function(input, output) {
   # "pKa(fromAsyr)"=4,
   # "UploadDryQC"=5,
   # "reprintBarcodes"=6 
+  # "UploadCCXFp.R =7
   
   Rfiles<-c(
     "Outandsave.R",
@@ -13,7 +14,8 @@ shinyServer(function(input, output) {
     "PipeOL.R",
     "shinyasyr_pKa.R",
     "getDQUP.R",
-    "reprintBC.R" 
+    "reprintBC.R" ,
+    "UploadCCXFp.R"
   )
   
   descriptions=c(
@@ -22,7 +24,8 @@ shinyServer(function(input, output) {
   "Select folder or files for outlier analysis",
   "Select folder of asyr files for pKa analysis",
   "Select a DryQC excel file to upload to database",
-  "Resave a previously created lot of catridge barcodes to the location targeted by Bartender software"
+  "Resave a previously created lot of catridge barcodes to the location targeted by Bartender software",
+   "Upload Cartridge Wet QC to database using Wave (asyr) files"
   )
   observeEvent(input$Scripts,{
     output$MSG <- renderText(descriptions[as.numeric(input$Scripts)])
