@@ -14,7 +14,8 @@ shinyUI(
                             "Outliers"=3,
                             "pKa(fromAsyr)"=4,
                             "UploadDryQC"=5,
-                            "reprintBarcodes"=6
+                            "reprintBarcodes"=6,
+                            "UploadWetQC"=7
                           )       
                                    
                                    
