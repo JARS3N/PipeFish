@@ -5,7 +5,7 @@ library(dplyr)
 library(XML)
 
 
-shinyServer(function(input, output) {
+shinyServer(function(input, output,session) {
   
   session$onSessionEnded(function() {
     stopApp()
