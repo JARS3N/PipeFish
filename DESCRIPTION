@@ -25,6 +25,7 @@ Imports:
 	RMySQL,
 	miniUI,
 	digest,
-	parallel
+	parallel,
+	openxlsx
 License: none
 LazyData: TRUE
