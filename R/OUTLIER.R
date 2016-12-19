@@ -19,15 +19,15 @@ mutate(.,pHdif=abs(pH-7.4))  %>%
 group_by(.,Well) %>%
  filter(.,pHdif==max(pHdif)) %>%
 slice(.,1) %>%
-ungroup(.) 
-    
+ungroup(.)
+
                    # Tick zero median
-                    
+
                         T0 =  select(X$LVL,O2=contains("O2 (mmHg)" ),Well,Tick) %>%
                                 filter(.,Tick==min(Tick)) %>%
                                 summarize(med=median(O2))
                         # Final merged output
-                        
+
                         sn=unlist(X$AC[which(X$AC[,1]=="Cartridge Serial"),2])
                         Lot=unlist(X$AC[which(X$AC[,1]=="Cartridge Lot"),2])
                         Instrument=unlist(X$AC[which(X$AC[,1]=="Instrument Serial"),2])
@@ -40,7 +40,7 @@ ungroup(.)
                             fl=fl,
                             MedianFirstTick = MedianFirstTick
                             )
-  
+
                             merge(O2,pH,by='Well') %>%
                               mutate(.,fl=u) %>%
                               merge(.,metainfo,by='fl')
@@ -51,7 +51,7 @@ require(dplyr)
 list.files(pattern='.xlsx',path=PATH,full.names=TRUE) %>%
 grep(pattern="~",x=.,invert=T,value=T)  %>%
 lapply(.,PipeFish::OLgrb) %>%
-dplyr::rbind_all()
+dplyr::bind_rows()
 }
 
 plotOLCTG<-function(df,nameexp){
