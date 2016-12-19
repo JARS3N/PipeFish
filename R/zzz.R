@@ -13,9 +13,9 @@
 #CheckforDataStash<-function(){
 #  LISTlib<-LISTlib("DataStash")
 #  if (!(TRUE %in% LISTlib)){
-#    dir.create(file.path((.libPaths()[1]),"DataStash")) 
+#    dir.create(file.path((.libPaths()[1]),"DataStash"))
 #  }}
-  
+
 #  DBinfo<-function(){
 #  fp<-file.path((.libPaths()[LISTlib("DataStash")]),"DataStash","DBinfo.RDS")
 #  readRDS(fp)
@@ -26,7 +26,7 @@
 #}
 
 givename<-function(u,splits=": "){
-  Q <-strsplit(u,split=splits);  
+  Q <-strsplit(u,split=splits);
   out<-Q[[1]][2];
   names(out)<-Q[[1]][1];
   out
@@ -36,12 +36,12 @@ autoUpGithub<-function(pack){
   testUrl <- function(url) {
     out <- tryCatch(
       {
-        readLines(con=url, warn=FALSE,n=1) 
+        readLines(con=url, warn=FALSE,n=1)
       },error=function(cond) {
         return(NA)
       },warning=function(cond) {
         return(FALSE)
-      },finally={})    
+      },finally={})
     return(out)
   }
   pkg<-packageDescription(pack)$URL
@@ -55,3 +55,4 @@ autoUpGithub<-function(pack){
 }
 
 
+wuzzy<-"fzzywzzy"
