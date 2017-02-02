@@ -5,7 +5,7 @@ shinyServer(function(input, output) {
 observeEvent(input$send,{
   print("ok")
   dir <- choose.dir()
-  PipeFish::XLSXos(dir)
+  if(input$CB==TRUE){PipeFish::XLSXos(dir)}
   if (!is.na(dir)) {
   list.files(path=dir,full.names = T,pattern = 'xlsx') %>%
   lapply(.,PipeFish::mungeLL) %>%
