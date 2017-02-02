@@ -8,8 +8,8 @@ observeEvent(input$send,{
   PipeFish::XLSXos(dir)
   if (!is.na(dir)) {
   list.files(path=dir,full.names = T,pattern = 'xlsx') %>%
-  lapply(.,mungeLL) %>%
-  lapply(.,UPLOADLL)
+  lapply(.,PipeFish::mungeLL) %>%
+  lapply(.,PipeFish::UPLOADLL)
   message("complete")
   }else{
   message('no directory selected')
