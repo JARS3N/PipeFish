@@ -256,7 +256,7 @@ require(RMySQL)
                    append=TRUE,overwrite = FALSE,row.names=FALSE)
     dbDisconnect(my_db)
     filter(u,type!= un.u[1]) %>% 
-      Uploads(.)
+      UploadsCC(.)
   }
 }
 ######################################################
