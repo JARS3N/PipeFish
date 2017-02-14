@@ -49,6 +49,14 @@ G2BC2<-function(fl){
   require(dplyr)
   require(readxl)
   require(tidyr)
+  AC<-function(fl){ 
+    h<-readxl::read_excel(fl,sheet="Assay Configuration")[,c(1,2)] 
+    AClist<-unlist(h[,2]) %>% set_names(unlist(h[,1])) 
+    data.frame(Lot=paste0(AClist["Cartridge Type"] %>% unname(),
+                              AClist["Cartridge Lot"] %>% unname()),
+               sn=AClist["Cartridge Serial"]%>% unname(),
+               fl=AClist["Assay Name"]%>% unname())
+  }
   G2F1<-{
     . %>% 
       readxl::read_excel(.,sheet="Raw")%>% 
@@ -78,11 +86,11 @@ G2BC2<-function(fl){
     },
     '24'=function(u){
       u %>% 
-        mutate(.,volHCl=c(rep(20,6),rep(42,6),rep(67,6),rep(0,6))) %>% 
+        mutate(.,volHCl=c(rep(62,6),rep(2*62,6),rep(3*62,6),rep(0,6))) %>% 
         mutate(.,deltapH=startpH-finalpH) %>% 
         mutate(.,HClMolarity=5/1000) %>% 
         mutate(.,molesH=(HClMolarity*(volHCl/1000^2))) %>% 
-        mutate(.,volMedia=620/(1000^2)) %>% 
+        mutate(.,volMedia=500/(1000^2)) %>% 
         mutate(.,bufferCapacity=molesH/(deltapH*volMedia)) 
     },
     '8'=function(u){
@@ -97,10 +105,9 @@ G2BC2<-function(fl){
   
   G2F1(fl) %>% 
   {FUNs[[.$Well %>% unique() %>% length() %>% as.character()]](.)} %>% 
-    mutate(.,fl=fl)
+    merge(AC(fl))
   
 }
-  
 ###### app for G2BC
 
 G2BCAPP<-function(){
