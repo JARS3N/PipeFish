@@ -235,13 +235,8 @@ require(RMySQL)
     "W" = "xfe96wetqc",
     "Q" = "xf24legacy"
   )
-  ConnectInfo<-DataStash::Triton()
-  my_db <- dbConnect(RMySQL::MySQL(),
-                     dbname=ConnectInfo[1],
-                     user=ConnectInfo[2],
-                     password=ConnectInfo[3],
-                     host=ConnectInfo[4],
-                     port=as.numeric(ConnectInfo[5]))
+  #ConnectInfo<-DataStash::Triton()
+  my_db <- rmysqlCon()
   u<-u %>% mutate(.,type=sapply(Lot,function(u){substr(u,1,1)})) 
   un.u<-unique(u$type)
   if (length(un.u)==1){
