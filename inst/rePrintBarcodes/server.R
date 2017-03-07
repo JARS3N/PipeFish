@@ -1,11 +1,7 @@
 library(shiny)
 library(dplyr)
- ConnectInfo<-DataStash::Triton()
-  my_db <- src_mysql(ConnectInfo[1],
-                     user=ConnectInfo[2],
-                     password=ConnectInfo[3],
-                     host=ConnectInfo[4],
-                     port=as.numeric(ConnectInfo[5]))
+ #ConnectInfo<-DataStash::Triton()
+  my_db <-dplyrCON()
 Q<-my_db %>%
   tbl('barcodelotview') %>% 
   select(Lot_Num) %>% 
