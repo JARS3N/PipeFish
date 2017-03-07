@@ -9,3 +9,14 @@ rmysqlCon<-function(){
             host=ConnectInfo[4],
             port=as.numeric(ConnectInfo[5]))
 }
+
+
+dplyrCON<function(){ 
+  require(dplyr)
+  ConnectInfo<-DataStash::Triton() 
+  src_mysql(ConnectInfo['dbname'],
+                    user=ConnectInfo['user'],
+                    password=ConnectInfo['password'],
+                    host=ConnectInfo['host'],
+                    port=as.numeric(ConnectInfo['port']))
+}
