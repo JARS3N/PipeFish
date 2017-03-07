@@ -3,12 +3,7 @@ UploadINSTCAL<-function(DIR,recursiveIN = F){
   suppressMessages(require(dplyr))
   suppressMessages(require(XML))
 dbAddINSTCAL<-function(X){
-  
-  ConnectInfo<-DataStash::Triton()
-  my_dbADD <- DBI::dbConnect(RMySQL::MySQL(),
-                     dbname=ConnectInfo[1],user=ConnectInfo[2],
-                     password=ConnectInfo[3],host=ConnectInfo[4],
-                     port=as.numeric(ConnectInfo[5]))
+  my_dbADD <- rmysqlCon()
   writeMeta<-dbWriteTable(my_dbADD, name="instqccalmeta",value=X$CalMeta,
                           append=TRUE,overwrite = FALSE,row.names=FALSE)
   if(writeMeta){
@@ -32,13 +27,7 @@ dbAddINSTCAL<-function(X){
 
 getIDnMeta<-function(){
   require(RMySQL)
-  ConnectInfo<-DataStash::Triton()
-  my_dbN <- DBI::dbConnect(RMySQL::MySQL(),
-                     dbname=ConnectInfo[1],
-                     user=ConnectInfo[2],
-                     password=ConnectInfo[3],
-                     host=ConnectInfo[4],
-                     port=as.numeric(ConnectInfo[5]))
+  my_dbN <- rmysqlCon()
   n<-DBI::dbGetQuery(my_dbN,"SELECT ID FROM INSTQCCALMETA ORDER BY ID DESC LIMIT 1;")
   DBI::dbDisconnect(my_dbN)
   n
