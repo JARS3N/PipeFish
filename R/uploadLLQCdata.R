@@ -4,11 +4,7 @@ ConnectInfo <- DataStash::Triton()
 require(RMySQL)
 require(dplyr)
 
-dmy_db <- src_mysql(ConnectInfo['dbname'],
-                    user=ConnectInfo['user'],
-                    password=ConnectInfo['password'],
-                    host=ConnectInfo['host'],
-                    port=as.numeric(ConnectInfo['port']))
+dmy_db <- dplyrCON()
 n <- dmy_db %>%
   tbl('instqcllmeta') %>%
   select(.,file) %>%
@@ -20,12 +16,7 @@ n <- dmy_db %>%
 
 if(n == 0){
   ConnectInfo <- DataStash::Triton()
-  my_db <- dbConnect(RMySQL::MySQL(),
-                     dbname = ConnectInfo[1],
-                     user = ConnectInfo[2],
-                     password = ConnectInfo[3],
-                     host = ConnectInfo[4],
-                     port = as.numeric(ConnectInfo[5]))
+  my_db <- rmysqlCon()
   dbWriteTable(my_db, name = "instqcllmeta",value = LLdat$meta,
                append = T,overwrite = F,row.names=FALSE)
 
