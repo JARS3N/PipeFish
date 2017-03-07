@@ -20,13 +20,7 @@ UploadDRYQC <- function() {
                                  if(grepl("xls",IN$name)){
                                    DF<-loadQCstats(IN$datapath)
                                    if(nrow(DF)>1){
-                                     ConnectInfo<-DataStash::Triton()
-                                     my_db <- dbConnect(RMySQL::MySQL(),
-                                                        dbname=ConnectInfo[1],
-                                                        user=ConnectInfo[2],
-                                                        password=ConnectInfo[3],
-                                                        host=ConnectInfo[4],
-                                                        port=as.numeric(ConnectInfo[5]))
+                                     my_db <- rmysqlCon()
                                      dbWriteTable(my_db, name="dryqcxf24",value=DF,
                                                   append=TRUE,overwrite = FALSE,row.names=FALSE)
                                      dbDisconnect(my_db)
