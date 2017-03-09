@@ -11,7 +11,7 @@ rmysqlCon<-function(){
 }
 
 
-dplyrCON<function(){ 
+dplyrCON<-function(){ 
   require(dplyr)
   ConnectInfo<-DataStash::Triton() 
   src_mysql(ConnectInfo['dbname'],
