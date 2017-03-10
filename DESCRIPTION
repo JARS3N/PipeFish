@@ -27,6 +27,7 @@ Imports:
 	digest,
 	parallel,
 	openxlsx,
+	xml2,
 	sortMV
 Remotes:  JARS3N/sortMV
 License: none
