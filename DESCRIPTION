@@ -27,5 +27,6 @@ Imports:
 	digest,
 	parallel,
 	openxlsx
+Remotes:  git::https://github.com/JARS3N/sortMV.git
 License: none
 LazyData: TRUE
