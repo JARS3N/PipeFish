@@ -58,7 +58,7 @@ getLot<-function(X){
               xmlValue(X[["doc"]][[1]][["Cartridge"]][["Lot"]]))
   if (length(Lot)==0){
   flx<-getFile(X)
-    regexp<-"[W,B,C,Q,T]{1}[E,0-9]{1}[0-9]{4}"
+    regexp<-"[W|B|C|Q|T]{1}[E|0-9]{1}[0-9]{4}"
     Lot<- paste0(unlist(regmatches( flx, gregexpr(regexp, flx))))
   }
   return(Lot)
