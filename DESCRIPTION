@@ -26,7 +26,8 @@ Imports:
 	miniUI,
 	digest,
 	parallel,
-	openxlsx
+	openxlsx,
+	sortMV
 Remotes:  JARS3N/sortMV
 License: none
 LazyData: TRUE
