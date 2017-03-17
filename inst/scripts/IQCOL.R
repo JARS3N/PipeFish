@@ -1,2 +1,2 @@
 
-shiny::runApp(PipeFish::InstrumentQCOLuploadApp(),launch.browser = TRUE)
+system.file(package='PipeFish',path='InstrumentQCOLuploadApp')
