@@ -29,7 +29,7 @@ lapply(.,PipeFish::.InstQCOL)%>%
 bind_rows()
 }
 
-  .uploadInstQCOL<-function(dir=choose.dir()){
+  uploadInstQCOL<-function(dir=choose.dir()){
     DATA<-PipeFish::.pullOLDATA
     require(RMySQL)
     db<-PipeFish::rmysqlCon()
