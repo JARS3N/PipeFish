@@ -1,3 +1,8 @@
   require(shiny)
   require(PipeFish)
-  server=function(input,output,session) {observeEvent(input$UploadData, {PipeFish::uploadInstQCOL()})})
+library(shiny)
+shinyServer(function(input, output) {
+ observeEvent(input$UploadData, {
+   PipeFish::uploadInstQCOL()
+ })
+})
