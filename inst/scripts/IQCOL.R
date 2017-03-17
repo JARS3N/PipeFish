@@ -1,1 +1,1 @@
-InstrumentQCOLuploadApp()
+PipeFish::InstrumentQCOLuploadApp()
