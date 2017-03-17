@@ -38,8 +38,15 @@ bind_rows()
     dbDisconnect(db)
   }
   
-  
-  
+InstrumentQCOLuploadApp <- function() {
+  msg<-"select Directory of xlsx files to upload"
+  require(shiny)
+  require(PipeFish)
+  shinyApp(
+  ui=fluidPage(p(msg),mainPanel(actionButton("UploadData", "UploadData"),textOutput("session"))),
+  server=function(input,output,session) {observeEvent(input$UploadData, {PipeFish::uploadInstQCOL()})}
+  )}
+
   
   
   
