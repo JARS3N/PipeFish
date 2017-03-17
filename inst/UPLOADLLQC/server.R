@@ -1,7 +1,9 @@
 library(shiny)
 library(dplyr)
-shinyServer(function(input, output) {
-
+shinyServer(function(input, output,session) {
+  session$onSessionEnded(function() {
+    stopApp()
+  })
 observeEvent(input$send,{
   print("ok")
   dir <- choose.dir()
