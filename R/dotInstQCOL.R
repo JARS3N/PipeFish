@@ -1,5 +1,5 @@
 # created a new function because pH isn't necessary
-.InstQCOL<-function(u=file.choose()){
+InstQCOL<-function(u=file.choose()){
 require(dplyr)
 X <- list(LVL = readxl::read_excel(u, sheet = PipeFish::fndLVLs(u)), 
           AC = readxl::read_excel(u, sheet = "Assay Configuration"))
@@ -22,15 +22,15 @@ select(X$LVL, O2 = contains("O2 (mmHg)"), Well,
   merge(.,metainfo) 
 }
 
-.pullOLDATA<-function(dir){
+pullOLDATA<-function(dir){
 require(dplyr)
 list.files(dir,pattern="xls",full.names=T) %>%
-lapply(.,PipeFish::.InstQCOL)%>%
+lapply(.,PipeFish::InstQCOL)%>%
 bind_rows()
 }
 
   uploadInstQCOL<-function(dir=choose.dir()){
-    DATA<-PipeFish::.pullOLDATA
+    DATA<-PipeFish::pullOLDATA()
     require(RMySQL)
     db<-PipeFish::rmysqlCon()
     dbWriteTable(db, name="inst_qc_ol",value=DATA,
