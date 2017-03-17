@@ -22,14 +22,14 @@ select(X$LVL, O2 = contains("O2 (mmHg)"), Well,
   merge(.,metainfo) 
 }
 
-pullOLDATA<-function(dir){
+pullOLDATA<-function(dir=choose.dir()){
 require(dplyr)
 list.files(dir,pattern="xls",full.names=T) %>%
 lapply(.,PipeFish::InstQCOL)%>%
 bind_rows()
 }
 
-  uploadInstQCOL<-function(dir=choose.dir()){
+  uploadInstQCOL<-function(){
     DATA<-PipeFish::pullOLDATA()
     require(RMySQL)
     db<-PipeFish::rmysqlCon()
