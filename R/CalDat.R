@@ -9,12 +9,9 @@ CalDat<-function(fl=file.choose()){
       return(Dat %>% as.numeric())
     }
   }
-  getType<-function(L){
-    data.frame(n=c(8,24,96),ctype=c("C","B","W")) %>% 
-      filter(.,n==L) %>% 
-      select(ctype) %>% 
-      .$ctype %>% as.vector()
-  }
+getType<-function(L){
+as.vector(setNames(c("C","B","W"),c(8,24,96))[as.character(L)])
+}
   getWells<-function(Type){
     list(
     "W"= paste0(sapply(LETTERS[1:8],rep,12),sprintf("%02d",c(1:12))),
