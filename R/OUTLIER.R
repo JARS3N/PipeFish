@@ -23,22 +23,19 @@ ungroup(.)
 
                    # Tick zero median
 
-                        T0 =  select(X$LVL,O2=contains("O2 (mmHg)" ),Well,Tick) %>%
+                        T0 <-  select(X$LVL,O2=contains("O2 (mmHg)" ),Well,Tick) %>%
                                 filter(.,Tick==min(Tick)) %>%
                                 summarize(med=median(O2))
                         # Final merged output
-
-                        sn=unlist(X$AC[which(X$AC[,1]=="Cartridge Serial"),2])
-                        Lot=unlist(X$AC[which(X$AC[,1]=="Cartridge Lot"),2])
-                        Instrument=unlist(X$AC[which(X$AC[,1]=="Instrument Serial"),2])
-                       fl=u
+                       Meta <-setNames(unlist(X$AC[,2]),unlist(X$AC[,1]))
+ 
                         MedianFirstTick = T0$med
                              metainfo <-data.frame(
-                            sn=sn,
-                            Lot=Lot ,
-                            Instrument=Instrument,
-                            fl=fl,
-                            MedianFirstTick = MedianFirstTick
+                            sn=Meta["Cartridge Serial"],
+                            Lot=Meta["Cartridge Lot"] ,
+                            Instrument=Meta["Instrument Serial"],
+                            fl=u,
+                            MedianFirstTick = T0$med
                             )
 
                             merge(O2,pH,by='Well') %>%
