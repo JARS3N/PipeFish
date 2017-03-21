@@ -1,7 +1,6 @@
 .onLoad <- function(libname = find.package("PipeFish"), pkgname = "PipeFish") {
     #CheckforDataStash();
     autoUpGithub('PipeFish')
-    checkUsr()
 }
 
 givename<-function(u,splits=": "){
