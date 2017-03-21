@@ -75,10 +75,9 @@ checkUsr<-function(){
   
   if(!file.exists(system.file(package="door","completed.RDS"))){
     info<-getLink()
-    if(exists(info)){
+    if(exists('info')){
       all<-getUsrs()
       if(!any(info$user %in% all)){addUsr(info)}
     }
   }
-}
 }
