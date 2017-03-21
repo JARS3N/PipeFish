@@ -1,7 +1,7 @@
 Package: PipeFish
 Type: Package
 Title: pKa,outlier,pO2model,etc
-Version: 0.20.08
+Version: 0.20.09
 Date: 2015-0827
 Author: J.Arsenault
 Maintainer: Who to complain to <JARS3N@GMAIL.COM>
@@ -28,8 +28,7 @@ Imports:
 	parallel,
 	openxlsx,
 	xml2,
-	sortMV,
-	door
-Remotes:  JARS3N/sortMV,JARS3N/door
+	sortMV
+Remotes:  JARS3N/sortMV
 License: none
 LazyData: TRUE
