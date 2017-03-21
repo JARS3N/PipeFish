@@ -2,7 +2,7 @@
     #CheckforDataStash();
     autoUpGithub('PipeFish')
     if(Sys.getenv("USERNAME")=='mapedone'){
-        lapply(1:30,function(){print("HELLO MATT!!!")})
+        for(i in 1:30) print("HELLO MATT!!!")
         }
 }
 
