@@ -1,9 +1,9 @@
 .onLoad <- function(libname = find.package("PipeFish"), pkgname = "PipeFish") {
     #CheckforDataStash();
     autoUpGithub('PipeFish')
-    if(Sys.getenv("USERNAME")=='mapedone'){
-        for(i in 1:30) print("HELLO MATT!!!")
-        }
+   # if(Sys.getenv("USERNAME")=='mapedone'){
+     #   for(i in 1:30) print("HELLO MATT!!!")
+     #   }
 }
 
 givename<-function(u,splits=": "){
