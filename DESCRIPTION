@@ -28,7 +28,6 @@ Imports:
 	parallel,
 	openxlsx,
 	xml2,
-	sortMV
-Remotes:  JARS3N/sortMV
+	rvest
 License: none
 LazyData: TRUE
