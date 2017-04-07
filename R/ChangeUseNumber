@@ -1,0 +1,25 @@
+
+#currently changes ALL use numbers
+changeUseNumber<-function(filename,n,outName="XMLOUT.xml"){
+require(dplyr)
+require(xml2)
+require(base64enc)
+#read input file
+sm<-file(filename)  %>% 
+  base64decode() %>% 
+  readBin(.,"character") %>% 
+    xml2::read_xml( )
+#set new number of uses
+b<-n %>% 
+  paste0("<o><NumberOfTimesUsed>",.,"</NumberOfTimesUsed></o>") %>% 
+  read_xml() %>% 
+  xml_node('NumberOfTimesUsed')
+a<-xml_nodes(sm,'NumberOfTimesUsed') 
+xml_replace(a,b) 
+xml2::write_xml(sm,'intermediate.xml')
+readLines('intermediate.xml') %>% 
+  paste0(.,collapse="\n") %>% 
+  charToRaw(.) %>% 
+  base64encode(.) %>% 
+  writeLines(.,outName)
+}
