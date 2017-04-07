@@ -1,9 +1,11 @@
-
-#currently changes ALL use numbers
-changeUseNumber<-function(filename,n,outName="XMLOUT.xml"){
+changeUseNumber<-function(filename,n,outName='Outputhere.xml'){
 require(dplyr)
 require(xml2)
 require(base64enc)
+dir<-dirname(filename)
+if(dir=="."){
+  dir<-getwd()
+}
 #read input file
 sm<-file(filename)  %>% 
   base64decode() %>% 
@@ -17,9 +19,9 @@ b<-n %>%
 a<-xml_nodes(sm,'NumberOfTimesUsed') 
 xml_replace(a,b) 
 xml2::write_xml(sm,'intermediate.xml')
-readLines('intermediate.xml') %>% 
+out<-readLines('intermediate.xml') %>% 
   paste0(.,collapse="\n") %>% 
   charToRaw(.) %>% 
-  base64encode(.) %>% 
-  writeLines(.,outName)
+  base64encode(.) 
+  writeLines(out,file.path(dir,outName))
 }
