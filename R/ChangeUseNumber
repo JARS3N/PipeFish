@@ -2,10 +2,6 @@ changeUseNumber<-function(filename,n,outName='Outputhere.xml'){
 require(dplyr)
 require(xml2)
 require(base64enc)
-dir<-dirname(filename)
-if(dir=="."){
-  dir<-getwd()
-}
 #read input file
 sm<-file(filename)  %>% 
   base64decode() %>% 
@@ -23,5 +19,8 @@ out<-readLines('intermediate.xml') %>%
   paste0(.,collapse="\n") %>% 
   charToRaw(.) %>% 
   base64encode(.) 
-  writeLines(out,file.path(dir,outName))
+  #writeLines(out,file.path(dir,outName))
+dirname(Sys.getenv('HOME')) %>% 
+  file.path(.,'Desktop',outName) %>% 
+  writeLines(out,.)
 }
