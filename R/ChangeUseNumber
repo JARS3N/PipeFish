@@ -14,9 +14,8 @@ b<-n %>%
   xml_node('NumberOfTimesUsed')
 a<-xml_nodes(sm,'NumberOfTimesUsed') 
 xml_replace(a,b) 
-xml2::write_xml(sm,'intermediate.xml')
-out<-readLines('intermediate.xml') %>% 
-  paste0(.,collapse="\n") %>% 
+#xml2::write_xml(sm,'intermediate.xml')
+out<-paste0(sm,collapse="\n") %>% 
   charToRaw(.) %>% 
   base64encode(.) 
   #writeLines(out,file.path(dir,outName))
