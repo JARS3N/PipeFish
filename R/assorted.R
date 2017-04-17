@@ -86,5 +86,7 @@ fndLVLs<-function(u){
 
 ######
 
-.ky<-function(){"UzNKaGEyVnVPM0J2YzJWcFpHOXVPM0J2YzJWcFpHOXVPMjFoWjI1cGVDNXNhM0V1WVdkcGJHVnVkQzVqYjIwN016TXdOaVVsWkdKdVlXMWxPM1Z6WlhJN2NHRnpjM2R2Y21RN2FHOXpkRHR3YjNKMA=="}
+.ky<-function(){
+     "S3Jha2VuO3Bvc2VpZG9uO3Bvc2VpZG9uO21hZ25peC5sa3EuYWdpbGVudC5jb207MzMwNiUlZGJuYW1lO3VzZXI7cGFzc3dvcmQ7aG9zdDtwb3J0"
+     }
 
