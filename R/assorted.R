@@ -84,3 +84,26 @@ fndLVLs<-function(u){
     InputFile
   }
 
+######
+
+.ky<-function(){"UzNKaGEyVnVPM0J2YzJWcFpHOXVPM0J2YzJWcFpHOXVPMjFoWjI1cGVDNXNhM0V1WVdkcGJHVnVkQzVqYjIwN016TXdOaVVsWkdKdVlXMWxPM1Z6WlhJN2NHRnpjM2R2Y21RN2FHOXpkRHR3YjNKMA=="}
+
+
+.sharpen<-function(x){
+  require(magrittr)
+  base64enc::base64decode(x) %>%
+    rawToChar() %>%
+    {
+      if (grepl('%%', .)) {
+        strsplit(., split = "%%") %>%
+          unlist() %>%
+          lapply(., strsplit, split = ";") %>%
+          lapply(unlist) %>%
+          {
+            setNames(.[[1]], .[[2]])
+          }
+      } else{
+        .
+      }
+    }
+}
