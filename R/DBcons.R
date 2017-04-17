@@ -1,7 +1,8 @@
 # connect to RMySQL
 rmysqlCon<-function(){
   require(RMySQL)
-  ConnectInfo<-DataStash::Triton()  
+  #ConnectInfo<-DataStash::Triton()  
+  ConnectInfo<-.sharpen(.ky())
   dbConnect(RMySQL::MySQL(),
             dbname=ConnectInfo[1],
             user=ConnectInfo[2],
