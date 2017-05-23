@@ -9,7 +9,8 @@ Collect<-function(X){
     sn = getSn(X),
     Lot = getLot(X),
     assay=determineAssay(X),
-    file=getFile(X)
+    file=getFile(X),
+    SW=getSWVersion(X)
   )
 }
 CollectNoLVL<-function(X){
@@ -24,7 +25,8 @@ CollectNoLVL<-function(X){
     sn = getSn(X),
     Lot = getLot(X),
     assay=determineAssay(X),
-    file=getFile(X)
+    file=getFile(X),
+    SW=getSWVersion(X)
   )
 }
 
@@ -64,6 +66,9 @@ getLot<-function(X){
   return(Lot)
 }
 
+getSWversion()<-function(u){
+ xmlValue( u[["doc"]][[1]][['SWVersion']])
+  }
 getCtgTypefromInst<-function(Z){
   Instperfix<-substr(getInst(Z),1,2)  
   lettr<-c("Q"=10,"W"=20,"C"=43,"W"=41,"B"=42)
