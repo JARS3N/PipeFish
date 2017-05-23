@@ -66,7 +66,7 @@ getLot<-function(X){
   return(Lot)
 }
 
-getSWversion()<-function(u){
+getSWversion<-function(u){
  xmlValue( u[["doc"]][[1]][['SWVersion']])
   }
 getCtgTypefromInst<-function(Z){
