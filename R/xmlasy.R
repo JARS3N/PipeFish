@@ -10,7 +10,7 @@ Collect<-function(X){
     Lot = getLot(X),
     assay=determineAssay(X),
     file=getFile(X),
-    SW=getSWVersion(X)
+    SW=swversion(X)
   )
 }
 CollectNoLVL<-function(X){
@@ -26,7 +26,7 @@ CollectNoLVL<-function(X){
     Lot = getLot(X),
     assay=determineAssay(X),
     file=getFile(X),
-    SW=getSWVersion(X)
+    SW=swversion(X)
   )
 }
 
@@ -66,9 +66,9 @@ getLot<-function(X){
   return(Lot)
 }
 
-getSWversion<-function(u){
- xmlValue( u[["doc"]][[1]][['SWVersion']])
-  }
+swversion<-function(x){
+  xmlValue(x$doc$children$XfeAssay[['SWVersion']])
+}
 getCtgTypefromInst<-function(Z){
   Instperfix<-substr(getInst(Z),1,2)  
   lettr<-c("Q"=10,"W"=20,"C"=43,"W"=41,"B"=42)
