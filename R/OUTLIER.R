@@ -1,4 +1,8 @@
-gradeOL<-function(u){c("A","B","C","D")[c(u < 5,u >=5 & u <10,u >=10 & u <20,u >= 20)]}
+gradeOL<-Vectorize(function(u){c("A","B","C","D")[c(u < 5,u >=5 & u <10,u >=10 & u <20,u >= 20)]})
+
+gradepH<-Vectorize(function(u){
+c("A", "B", "C", "D")[c(u < 0.1, u >= 0.1 & u <= 0.2, u > 0.2 & u <= 0.4, u > 0.4)]
+})
 
 OLgrb<-function(u){
  #Import sheets from XLSX file
@@ -12,14 +16,15 @@ X<-list(LVL=readxl::read_excel(u,sheet=PipeFish::fndLVLs(u)) ,
      slice(.,1) %>%
        ungroup(.) %>%
         rename(.,mxO2=O2dif) %>%
-       mutate(.,grade=sapply(mxO2,gradeOL))
+       mutate(.,grade=gradeOL(mxO2))
     #pH Outliers
 pH<-select(X$LVL,Well,pH) %>%
 mutate(.,pHdif=abs(pH-7.4))  %>%
 group_by(.,Well) %>%
  filter(.,pHdif==max(pHdif)) %>%
 slice(.,1) %>%
-ungroup(.)
+ungroup(.)%>%
+mutate(.,grade=gradepH(pHdif))
 
                    # Tick zero median
 
