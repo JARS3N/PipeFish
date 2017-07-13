@@ -3,34 +3,44 @@ options(warn=-1)
 suppressMessages(require(dplyr))
 require(xml2)
 require(rvest)
+ 
   cleansplit<-function(u){
-    A<-strsplit(u,split=",") %>% unlist
-    A[1]<-paste0("Well: ",A[1])
-    strsplit(A,"[:] ") %>%
-      lapply(.,function(u){
+  A<-strsplit(u,split=",") %>% unlist
+  A[1]<-paste0("Well: ",A[1])
+  strsplit(A,"[:] ") %>%
+    lapply(.,function(u){
       h<-data.frame(X=u[2],stringsAsFactors=FALSE);
       names(h)<-u[1];h}) %>%
-      bind_cols()
-  }
-  cleansplit_all<-function(u){
-    lapply(u,cleansplit) %>%
-      bind_rows()
-  }
-  getPlat<-function(u){
-    c("W"="XFe96","B"="XFe24","C"="XFp")[u]
-  }
+    bind_cols()
+}
+cleansplit_all<-function(u){
+  lapply(u,cleansplit) %>%
+    bind_rows()
+}
 
-  b<-read_xml(xml)
-   check<-b %>%  
-   rvest::xml_nodes(.,"Details") %>% 
-   xml2::xml_text() %>% 
-   grepl("Could not find",.) %>% any()
- if(check){return(c("FAILURE"))}
-  Y<-  b %>%
-    rvest::xml_nodes(.,"Details") %>%
-    .[grepl("&lt;table",.)] %>%
-    xml2::xml_text() %>%
-    gsub("Optical Window","",.) %>%
+getPlat<-function(u){
+  c("W"="XFe96","B"="XFe24","C"="XFp")[u]
+}
+
+check<-function(b){ 
+  b %>%  
+  rvest::xml_nodes(.,"Details") %>% 
+  xml2::xml_text() %>% 
+  grepl("Could not find",.) %>% any()
+}
+
+findTable<-function(b){  
+  xml_nodes(b, xpath = "//InspectionDetailsItem[Name='Results']//Details") %>%  
+    xml2::xml_text()
+}
+
+getBarcode<-function(b){
+  xml_nodes(b, xpath = "//InspectionDetailsItem[Name='Bar Code']//Details") %>%  
+    xml2::xml_text()
+}
+
+gsubTable<-function(TBL){
+   gsub("Optical Window","",TBL) %>%
     gsub('center-x:',',center-x:',.) %>%
     gsub('center-y:',',center-y:',.) %>%
     gsub('radius' , ',radius',.) %>%
@@ -52,22 +62,30 @@ require(rvest)
     gsub('Spot 1:','',.) %>%
     read_html() %>% html_table() %>%
     .[[1]]
-  #
-  Barcode<-rvest::xml_nodes(b,"Details") %>%
-    .[grepl("[A-Z]{1}[0-9]{5}[A-Z|0-9]{1}[0-9]{4}B",
-            .)
-      ] %>%
-    xml_text()
-  #
- lapply(Y,cleansplit_all) %>%
-   bind_rows() %>%
-   arrange(.,Well) %>%
-   rename(.,center_x=`center-x`,center_y=`center-y`) %>%
-   group_by(Well) %>%
-   mutate_all(.,as.numeric) %>%
-   ungroup() %>%
-   mutate(.,
-          Lot=paste0(substr(Barcode,1,1),substr(Barcode,7,11)),
-          sn=substr(Barcode,2,6),
-          platform=getPlat(substr(Lot,1,1)))
 }
+
+munge<-function(Y){
+  lapply(Y,cleansplit_all) %>%
+  bind_rows() %>%
+  arrange(.,Well) %>%
+  rename(.,center_x=`center-x`,center_y=`center-y`) %>%
+  group_by(Well) %>%
+  mutate_all(.,as.numeric) %>%
+  ungroup() %>%
+  mutate(.,
+         Lot=paste0(substr(Barcode,1,1),substr(Barcode,7,11)),
+         sn=substr(Barcode,2,6),
+         platform=getPlat(substr(Lot,1,1)))
+}
+
+
+
+if(check(b)){return(c("FAILURE"))}
+
+Barcode<-getBarcode(b)
+  findTable(b) %>%
+  gsubTable() %>%
+  munge()
+
+}
+ 
