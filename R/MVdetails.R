@@ -79,7 +79,7 @@ munge<-function(Y){
 }
 
 
-
+b<-read_xml(xml)
 if(check(b)){return(c("FAILURE"))}
 
 Barcode<-getBarcode(b)
