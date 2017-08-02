@@ -18,7 +18,7 @@ X<-list(LVL=readxl::read_excel(u,sheet=PipeFish::fndLVLs(u)) ,
         rename(.,mxO2=O2dif) %>%
        mutate(.,grade=gradeOL(mxO2))
     #pH Outliers
-pH<-select(X$LVL,Well,pH) %>%A
+pH<-select(X$LVL,Well,pH) %>%
 mutate(.,pHdif=abs(pH-7.4))  %>%
 group_by(.,Well) %>%
  filter(.,pHdif==max(pHdif)) %>%
