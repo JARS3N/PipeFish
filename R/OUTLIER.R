@@ -24,7 +24,7 @@ group_by(.,Well) %>%
  filter(.,pHdif==max(pHdif)) %>%
 slice(.,1) %>%
 ungroup(.)%>%
-mutate(.,grade=gradepH(pHdif))
+mutate(.,gradepH=gradepH(pHdif))
 
                    # Tick zero median
 
