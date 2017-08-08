@@ -22,11 +22,8 @@ getPlat<-function(u){
   c("W"="XFe96","B"="XFe24","C"="XFp")[u]
 }
 
-check<-function(b){ 
-  b %>%  
-  rvest::xml_nodes(.,"Details") %>% 
-  xml2::xml_text() %>% 
-  grepl("Could not find",.) %>% any()
+check<-function(b){   
+xml2::xml_text( xml_nodes(b, xpath = "//InspectionDetailsItem[Name='Result']//Details"))!="OK"
 }
 
 findTable<-function(b){  
