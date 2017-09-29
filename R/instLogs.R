@@ -1,12 +1,14 @@
 ReadBarcodeTimes<-function(u){
-  list.files(path=u,pattern='.log') %>%
- split(.,.) %>%
-  lapply(.,ReadBarcodeTime)%>%
-    bind_rows(.)}
+ fls<- list.files(path=u,pattern='.log')  
+  dplyr::bind_rows(
+  lapply(
+    split( fls, fls),
+    ReadBarcodeTime)
+    )
+}
 
 ReadBarcodeTime<-function(x){
-  readLines(x) %>%
-  data.frame(k=.) %>%
+  data.frame(k=readLines(x) ) %>%
   filter(.,grepl(pattern="ReadCartridgeBarcode",k)) %>%
 separate(.,col=k,sep=";",c("A","B","C","D","E")) %>%
 (function(u){u$A}) %>%
