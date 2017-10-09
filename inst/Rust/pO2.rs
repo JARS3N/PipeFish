@@ -39,5 +39,5 @@ let vvp = vp(tc);
 let atm = 760.0;
 let ddo = dd(tc,vvp,atm);
 let hhc=hc(tc);
-println!("pO2: {}",ddo*(1./1000.)*(1./32.)*(18./1000.)*hhc*atm;)
+println!("pO2: {}",ddo*(1./1000.)*(1./32.)*(18./1000.)*hhc*atm);
 }
