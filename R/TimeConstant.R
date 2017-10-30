@@ -28,19 +28,20 @@ PreProcessTC <-function(u){#where u is the csv file csv file
     summarize(TC=PipeFish::TC(data.frame(Time=Time,counts=counts)))
 }
 ###### will replace TC with TC2 when it appears completed.
-TC2<-function(x){
-    cumdif.counts<-diff(x$counts)
-    injection<-x$Time[which(cumdif.counts==min(cumdif.counts))-3]
-    period<-injection + 30
-    atmi<-abs(x$Time-injection)#abs_time_minus_injection
-    atmp<-abs(x$Time-period)#abs_time_minus_period
-    start<-x$counts[x$Time==x$Time[which(atmi==min(atmi)]]
-    endP<-x$counts[x$Time==x$Time[which(atmp)==min(atmp)]]
-    truncated_counts<-x$counts[which(atmp==min(atmp)):(length(x$Time)-4)]
-    delta_time<-start-lowest_avg_n_counts(truncated_counts)
-    delta_period<-start-endP
-    abs(period/(log(1/(1-(delta_period/delta_time)))))
-}
+###### will replace TC with TC2 when it appears completed.
+# TC2<-function(x){
+#   cumdif.counts<-diff(x$counts)
+#   injection<-x$Time[which(cumdif.counts==min(cumdif.counts))-3]
+#   period<-injection + 30
+#   atmi<-abs(x$Time-injection)#abs_time_minus_injection
+#   atmp<-abs(x$Time-period)#abs_time_minus_period
+#   start<-x$counts[x$Time==x$Time[which(atmi==min(atmi)]]
+#   endP<-x$counts[x$Time==x$Time[which(atmp)==min(atmp)]]
+#   truncated_counts<-x$counts[which(atmp==min(atmp)):(length(x$Time)-4)]
+#   delta_time<-start-lowest_avg_n_counts(truncated_counts)
+#   delta_period<-start-endP
+#   abs(period/(log(1/(1-(delta_period/delta_time)))))
+# }
 
 lowest_avg_n_counts<-function(U,n=5){
     i<-seq_along(U)
